@@ -5,7 +5,7 @@ import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
-  base: '/portfolio/',
+  base: '/samarthshete/', 
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
