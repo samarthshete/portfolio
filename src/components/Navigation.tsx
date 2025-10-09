@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react'
 
 const navItems = [
   { id: 'home', label: 'Home' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'writing', label: 'Writing' },
   { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'writing', label: 'Writing' },
   { id: 'contact', label: 'Contact' },
 ]
 
@@ -53,7 +53,7 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 dark:bg-dark/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/20 dark:border-white/10">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-16">
             <button
@@ -117,7 +117,7 @@ export default function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="fixed top-16 left-0 right-0 z-40 md:hidden bg-background dark:bg-dark border-b border-gray-200 dark:border-gray-800"
+            className="fixed top-16 left-0 right-0 z-40 md:hidden glass border-b border-white/20 dark:border-white/10"
           >
             <div className="px-6 py-4 space-y-2">
               {navItems.map(item => (

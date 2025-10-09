@@ -3,40 +3,43 @@ import { Briefcase, Calendar } from 'lucide-react'
 
 const experiences = [
   {
-    company: 'Tech Innovators Inc.',
-    role: 'Senior AI/ML Engineer',
-    period: 'Jan 2023 - Present',
-    description: 'Leading ML infrastructure and model deployment, building scalable AI systems serving 1M+ users.',
+    company: 'George Washington University — Law Media Center',
+    role: 'Technical Support Assistant',
+    period: 'May 2025 - Present',
+    description:
+      'Keep course recordings reliable at scale through media ops and classroom AV monitoring.',
     achievements: [
-      'Architected and deployed end-to-end ML pipeline reducing model training time by 70%',
-      'Built recommendation system improving user engagement by 45%',
-      'Mentored team of 3 junior engineers',
+      'Automated Canvas/Kaltura/Epiphan publishing so 1,000+ class recordings go out on time',
+      'Built real-time incident dashboards and alerts to surface issues fast',
+      'Added AV/media server health checks to catch 200+ issues before class',
     ],
-    technologies: ['Python', 'TensorFlow', 'AWS', 'Kubernetes', 'MLOps'],
+    technologies: ['Python', 'Canvas API', 'Kaltura', 'Epiphan', 'Splunk', 'AWS', 'Freshdesk'],
   },
   {
-    company: 'Cloud Solutions Co.',
-    role: 'Software Engineer',
-    period: 'Jun 2021 - Dec 2022',
-    description: 'Developed cloud-native applications and microservices architecture.',
+    company: 'VG Computers',
+    role: 'Machine Learning Intern',
+    period: 'Mar 2023 - Sep 2023',
+    description:
+      'Prototyped and shipped ML features with clear product impact.',
     achievements: [
-      'Migrated monolithic application to microservices, improving scalability by 300%',
-      'Reduced cloud infrastructure costs by 40% through optimization',
-      'Implemented CI/CD pipelines reducing deployment time from hours to minutes',
+      'Trained an XGBoost fraud model and raised accuracy by ~18%',
+      'Built a real-time recommender on PyTorch/SageMaker that lifted engagement ~20%',
+      'Set up MLflow/Airflow/Docker so retraining and deploys run on autopilot',
     ],
-    technologies: ['Node.js', 'Docker', 'AWS', 'PostgreSQL', 'React'],
+    technologies: ['Python', 'XGBoost', 'PyTorch', 'SageMaker', 'MLflow', 'Airflow', 'Docker'],
   },
   {
-    company: 'StartupXYZ',
-    role: 'Full-Stack Developer',
-    period: 'Jan 2020 - May 2021',
-    description: 'Built product from scratch, handling both frontend and backend development.',
+    company: 'Tecspeak IT Solution',
+    role: 'Software Developer',
+    period: 'Dec 2021 - Feb 2023',
+    description:
+      'Delivered full-stack features end to end with a focus on speed and reliability.',
     achievements: [
-      'Shipped v1 product in 4 months, acquired 5K users in first 3 months',
-      'Implemented real-time features using WebSockets',
-      'Created admin dashboard with comprehensive analytics',
+      'Shipped React/Node/MongoDB features with reusable components and clean APIs',
+      'Reduced slow queries using Redis caching and better indexing',
+      'Containerized services and added CI/CD on EKS to ship faster',
     ],
-    technologies: ['React', 'Express', 'MongoDB', 'Redis', 'Socket.io'],
+    technologies: ['React', 'Node.js', 'MongoDB', 'Redis', 'Docker', 'Amazon EKS', 'GitHub Actions'],
   },
 ]
 

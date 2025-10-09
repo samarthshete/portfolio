@@ -62,7 +62,7 @@ export default function Contact() {
                         href="mailto:samarth@example.com"
                         className="text-foreground dark:text-white hover:text-primary dark:hover:text-accent transition-colors"
                       >
-                        samarth@example.com
+                        samarth.shete@gwu.edu
                       </a>
                     </div>
                   </div>
@@ -73,7 +73,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-sm text-foreground/50 dark:text-white/50">Location</p>
-                      <p className="text-foreground dark:text-white">San Francisco, CA</p>
+                      <p className="text-foreground dark:text-white">Washington, DC</p>
                     </div>
                   </div>
 
@@ -83,7 +83,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-sm text-foreground/50 dark:text-white/50">Phone</p>
-                      <p className="text-foreground dark:text-white">+1 (555) 123-4567</p>
+                      <p className="text-foreground dark:text-white">+1 (703) 928-9684</p>
                     </div>
                   </div>
                 </div>
@@ -95,7 +95,7 @@ export default function Contact() {
                 </h3>
                 <div className="flex gap-4">
                   <a
-                    href="https://github.com"
+                    href="https://github.com/samarthshete"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-primary/10 dark:hover:bg-accent/10 transition-colors"
@@ -104,7 +104,7 @@ export default function Contact() {
                     <Github className="w-5 h-5 text-foreground dark:text-white" />
                   </a>
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/samarthshete14/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-primary/10 dark:hover:bg-accent/10 transition-colors"
@@ -112,15 +112,7 @@ export default function Contact() {
                   >
                     <Linkedin className="w-5 h-5 text-foreground dark:text-white" />
                   </a>
-                  <a
-                    href="https://twitter.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-primary/10 dark:hover:bg-accent/10 transition-colors"
-                    aria-label="Twitter"
-                  >
-                    <Twitter className="w-5 h-5 text-foreground dark:text-white" />
-                  </a>
+                   
                 </div>
               </div>
 

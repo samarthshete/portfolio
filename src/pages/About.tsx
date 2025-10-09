@@ -53,13 +53,13 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-foreground/70 dark:text-white/70 leading-relaxed">
                 <p>
-                  I'm a software engineer specializing in AI/ML and cloud-native applications. 
+                  I'm a software engineer specializing in full-stack development, AI/ML and cloud-native applications. 
                   My journey in tech started with a fascination for how machines learn and has evolved 
                   into building production systems that serve millions of users.
                 </p>
                 <p>
-                  Over the past 4+ years, I've worked on everything from training custom ML models 
-                  to architecting scalable microservices. I believe in writing clean, maintainable 
+                  Over the past 4+ years, I’ve worked across the stack—from training custom ML models to architecting scalable microservices and crafting responsive UIs. 
+                  I believe in writing clean, maintainable 
                   code and building products that solve real problems.
                 </p>
                 <p>
@@ -96,10 +96,10 @@ export default function About() {
                   <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-accent mt-2 flex-shrink-0" />
                   <span>Mentor junior engineers and contribute to technical documentation</span>
                 </li>
-                <li className="flex items-start gap-3">
+                {/* <li className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-accent mt-2 flex-shrink-0" />
                   <span>Write about software engineering and AI/ML best practices</span>
-                </li>
+                </li> */}
               </ul>
             </div>
           </motion.div>
