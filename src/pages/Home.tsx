@@ -65,23 +65,11 @@ const experiences = [
     ],
     technologies: ['Python', 'Canvas API', 'Kaltura', 'Epiphan', 'Splunk', 'AWS', 'Freshdesk'],
   },
-  {
-    company: 'VG Computers',
-    role: 'Machine Learning Intern',
-    period: 'Mar 2023 - Sep 2023',
-    description:
-      'Prototyped and shipped ML features with clear product impact.',
-    achievements: [
-      'Trained an XGBoost fraud model and raised accuracy by ~18%',
-      'Built a real-time recommender on PyTorch/SageMaker that lifted engagement ~20%',
-      'Set up MLflow/Airflow/Docker so retraining and deploys run on autopilot',
-    ],
-    technologies: ['Python', 'XGBoost', 'PyTorch', 'SageMaker', 'MLflow', 'Airflow', 'Docker'],
-  },
+  
   {
     company: 'Tecspeak IT Solution',
     role: 'Software Developer',
-    period: 'Dec 2021 - Feb 2023',
+    period: 'Jul 2022 - Mar 2024',
     description:
       'Delivered full-stack features end to end with a focus on speed and reliability.',
     achievements: [
@@ -91,6 +79,19 @@ const experiences = [
     ],
     technologies: ['React', 'Node.js', 'MongoDB', 'Redis', 'Docker', 'Amazon EKS', 'GitHub Actions'],
   },
+  {
+    company: 'VG Computers',
+    role: 'Machine Learning Intern',
+    period: 'Nov 2021 - May 2022',
+    description:
+      'Prototyped and shipped ML features with clear product impact.',
+    achievements: [
+      'Trained an XGBoost fraud model and raised accuracy by ~18%',
+      'Built a real-time recommender on PyTorch/SageMaker that lifted engagement ~20%',
+      'Set up MLflow/Airflow/Docker so retraining and deploys run on autopilot',
+    ],
+    technologies: ['Python', 'XGBoost', 'PyTorch', 'SageMaker', 'MLflow', 'Airflow', 'Docker'],
+  }
 ]
 
 const posts = [
