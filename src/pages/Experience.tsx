@@ -22,9 +22,9 @@ const experiences = [
     description:
       'Support graduate-level coursework by assisting with instruction, grading, and student mentorship, with a focus on Python-based optimization and data-driven decision models.',
     achievements: [
-      'Debugged and validated Python-based pricing and revenue optimization assignments, ensuring correctness of algorithms and adherence to modeling assumptions under capacity constraints.',
-      'Led weekly office hours and code reviews for 60+ graduate students, reinforcing clean code practices, algorithmic thinking, and data-driven problem-solving.',
-      'Assisted with grading, assignment design, and exam preparation, providing clear technical feedback to improve student understanding and performance.',
+      'Debug and validate Python-based pricing and revenue optimization assignments, ensuring correctness of algorithms and adherence to modeling assumptions under capacity constraints.',
+      'Lead weekly office hours and code reviews for 60+ graduate students, reinforcing clean code practices, algorithmic thinking, and data-driven problem-solving.',
+      'Assist with grading, assignment design, and exam preparation, providing clear, actionable technical feedback to improve student understanding and performance.',
     ],
     technologies: [
       'Python',
