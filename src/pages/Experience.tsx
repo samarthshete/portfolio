@@ -17,7 +17,7 @@ const experiences = [
   },
   {
     company: 'George Washington University ',
-    role: 'Graduate Instructional Assistant',
+    role: 'Graduate Teaching Assistant',
     period: 'Dec 2025 - Present',
     description:
       'Support graduate-level coursework by assisting with instruction, grading, and student mentorship, with a focus on Python-based optimization and data-driven decision models.',
