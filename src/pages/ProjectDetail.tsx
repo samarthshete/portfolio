@@ -96,6 +96,8 @@ export type Project = {
   caseStudy?: CaseStudy
 }
 
+const isExternalUrl = (url?: string) => /^https?:\/\//.test(url ?? '')
+
 /* ----------------------------- NEW: Scroll Progress ----------------------------- */
 function ScrollProgress() {
   const progress = useMotionValue(0)
@@ -348,7 +350,266 @@ function QuickFacts({ project }: { project: Project }) {
 /* ----------------------------- DATA ----------------------------- */
 
 export const projectsData: Record<string, Project> = {
-  // ✅ SmartHire with your full case study
+  'agentshield-security-evaluation-for-mcp-agents': {
+    id: 'agentshield-security-evaluation-for-mcp-agents',
+    title: 'AgentShield: Security Evaluation for MCP Agents',
+    category: 'ML',
+    description:
+      'Red-team framework for testing tool-using AI agents against prompt injection, tool poisoning, and unsafe action flows.',
+    longDescription:
+      'Tool-using AI agents create a much larger risk surface than standard chatbots because they can read external context, call tools, and take actions across connected systems. Most teams focus on capability first and only think about security after something breaks.\n\nI built AgentShield to evaluate agent workflows before deployment. The framework combines static artifact scanning with dynamic adversarial testing to probe MCP-connected agents for realistic attack patterns, including prompt injection, poisoned tool outputs, privilege escalation attempts, and unsafe action chaining. A judge-based validation layer then classifies whether the agent resisted, partially failed, or fully failed under each scenario.\n\nThe outcome is a practical security evaluation workflow for agent systems. AgentShield helps surface risky configurations, exposes exploit paths earlier, and gives developers a clearer way to harden prompts, permissions, tools, and orchestration logic before those systems reach production.',
+    tags: [
+      'Python',
+      'MCP',
+      'AI Security',
+      'Red Teaming',
+      'Agent Evaluation',
+      'Prompt Injection',
+      'Tool Safety',
+      'CI Testing',
+    ],
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=600&fit=crop',
+    github: '',
+    demo: '',
+    date: '2026',
+    team: 'Solo Project',
+    features: [
+      'Static scanning for risky MCP-connected artifacts and exposed instructions',
+      'Dynamic adversarial testing for tool-using agent workflows',
+      'Attack coverage across prompt injection, tool poisoning, escalation, and unsafe chaining',
+      'Judge-based evaluation of multi-step failures',
+      'Actionable reporting for hardening tools, prompts, and orchestration logic',
+      'Designed for repeatable security validation, not one-off demos',
+    ],
+    challenges:
+      'Modeling realistic attack paths, separating partial compromise from full compromise, evaluating tool-aware failures, and preventing noisy false positives.',
+    impact:
+      'Evaluated 100+ adversarial workflows, reached ~82% precision in unsafe behavior detection, and created CI-friendly checks for agent security before deployment.',
+    caseStudy: {
+      headline:
+        'A red-team evaluation framework that stress-tests tool-using AI agents for security failures before production.',
+      engineeringChallenge: {
+        title: 'The Engineering Challenge',
+        bullets: [
+          'Scanning prompts for risky text is easy; evaluating multi-step unsafe behavior across tool workflows is hard.',
+          'The framework had to inspect both static artifacts and dynamic behavior under realistic adversarial pressure.',
+          'Results needed to be actionable for engineers, not vague warnings.',
+        ],
+      },
+      architecture: {
+        title: 'System Architecture & Logic',
+        summary:
+          'AgentShield evaluates agents in layers: static artifact analysis, dynamic scenario execution, behavior judgment, and actionable reporting.',
+        agents: [
+          {
+            name: 'Artifact Scanner',
+            role: 'Inspects exposed files, instructions, tool definitions, and MCP-connected surfaces for risky patterns before runtime.',
+            icon: 'database',
+          },
+          {
+            name: 'Scenario Runner',
+            role: 'Executes repeatable adversarial workflows across injection, poisoning, escalation, and unsafe-tool classes.',
+            icon: 'orchestrator',
+          },
+          {
+            name: 'Evaluation Engine',
+            role: 'Determines whether the agent resisted, partially failed, or fully failed each attack scenario.',
+            icon: 'evaluator',
+          },
+          {
+            name: 'Reporting Layer',
+            role: 'Aggregates findings into fix-ready categories for prompts, permissions, tools, and orchestration logic.',
+            icon: 'frontend',
+          },
+        ],
+      },
+      decisions: {
+        title: 'Key Technical Decisions & Trade-offs',
+        items: [
+          {
+            heading: 'Why combine static and dynamic testing?',
+            decision: 'Built both static scanning and dynamic red-team execution.',
+            tradeoff:
+              'Static checks are fast but limited; dynamic tests are realistic but slower. Combined coverage catches both exposed risk surfaces and exploitability.',
+          },
+          {
+            heading: 'Why scenario-based red teaming?',
+            decision: 'Used workflow-specific adversarial scenarios over generic safety prompts.',
+            logic:
+              'The highest-risk failures come from unsafe actions, chained tool calls, and escalation paths, not just bad text generation.',
+          },
+          {
+            heading: 'Why judge-based validation?',
+            decision: 'Used structured judgment logic for multi-step outcomes instead of keyword matching.',
+            tradeoff:
+              'More evaluation complexity, but it supports nuanced outcomes like partial compromise and attempted tool misuse.',
+          },
+        ],
+      },
+      performance: {
+        title: 'Quantified Impact & Performance',
+        metrics: [
+          {
+            label: 'Adversarial coverage',
+            value: 'Evaluated 100+ adversarial workflows across injection, poisoning, unsafe-tool use, and escalation scenarios.',
+            icon: 'throughput',
+          },
+          {
+            label: 'Detection quality',
+            value: 'Reached about 82% precision in identifying adversarial or unsafe behavior in current validation runs.',
+            icon: 'accuracy',
+          },
+          {
+            label: 'Operational readiness',
+            value: 'Designed for CI-style security checks before deployment to catch risky agent behavior earlier.',
+            icon: 'reliability',
+          },
+        ],
+      },
+      scar: {
+        title: 'The "False Compromise" Problem',
+        problem:
+          'Early versions marked agents as compromised when they merely echoed malicious content without executing unsafe behavior.',
+        fix: [
+          'Split outcomes into layers: malicious content received, acknowledged, unsafe reasoning triggered, unsafe action attempted, and unsafe action executed.',
+          'Added tool-action validation so compromise requires operationally meaningful risk, not scary-looking text.',
+          'Reduced noisy failures and made reports useful for prioritizing real security fixes.',
+        ],
+      },
+      takeaway:
+        'Agent security evaluation is only useful when it distinguishes exposure from actual compromise and measures real operational risk.',
+    },
+  },
+  'contextlens-rag-evaluation-debugging-platform': {
+    id: 'contextlens-rag-evaluation-debugging-platform',
+    title: 'ContextLens: RAG Evaluation & Debugging Platform',
+    category: 'ML',
+    description:
+      'Trace-driven platform for diagnosing retrieval, grounding, chunking, and hallucination failures in RAG systems.',
+    longDescription:
+      'Modern RAG systems often fail in ways that are hard to debug. A bad answer can come from weak retrieval, poor chunking, low-quality ranking, context dilution, or unsupported generation, but most teams only see the final output and a vague metric. That makes iteration slow and unreliable.\n\nI built ContextLens to make those failures inspectable. The platform captures full pipeline traces, stores retrieved chunks and context assembly artifacts, and evaluates each run using a hybrid scoring approach that combines deterministic checks with LLM-as-judge signals. Instead of producing a single shallow score, it helps pinpoint likely failure modes such as retrieval misses, weak evidence selection, grounding problems, and hallucinated synthesis.\n\nThe result is a developer-first evaluation workflow for RAG systems. ContextLens makes experiments easier to compare, makes failure analysis more concrete, and turns RAG debugging from guesswork into an observable engineering process.',
+    tags: [
+      'FastAPI',
+      'Python',
+      'PostgreSQL',
+      'pgvector',
+      'RAG',
+      'LLM Evaluation',
+      'Observability',
+      'Tracing',
+    ],
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=600&fit=crop',
+    github: '',
+    demo: '',
+    date: '2026',
+    team: 'Solo Project',
+    features: [
+      'Trace-level inspection of retrieval, context assembly, and final answer generation',
+      'Hybrid scoring with deterministic checks and LLM-as-judge signals',
+      'Failure-mode diagnosis for retrieval misses, chunking issues, grounding gaps, and hallucinations',
+      'Experiment comparison across prompts, retrievers, ranking, and chunking strategies',
+      'Structured backend for repeatable evaluation workflows',
+      'Developer-first UX focused on debugging, not vanity metrics',
+    ],
+    challenges:
+      'Separating overlapping failure modes, avoiding misleading single-score evaluations, and storing rich traces cleanly for repeated experiments.',
+    impact:
+      'Ran 208 traced evaluations across 52 benchmark queries and reduced debugging ambiguity by making each run inspectable at chunk and context level.',
+    caseStudy: {
+      headline:
+        'A developer-first platform for debugging and evaluating RAG systems with trace-level visibility, hybrid scoring, and failure diagnosis.',
+      engineeringChallenge: {
+        title: 'The Engineering Challenge',
+        bullets: [
+          'Most evaluation tools collapse behavior into one score, hiding retrieval, chunking, grounding, and generation failures.',
+          'The platform needed to evaluate retrieval and generation together without conflating failure modes.',
+          'Experiments had to be comparable across retrievers, prompts, and ranking strategies.',
+        ],
+      },
+      architecture: {
+        title: 'System Architecture & Logic',
+        summary:
+          'ContextLens sits between the engineer and the RAG pipeline, captures traces at each step, scores outcomes with hybrid evaluation, and surfaces likely failure causes.',
+        agents: [
+          {
+            name: 'FastAPI Backend',
+            role: 'Orchestrates experiments, stores traces, and exposes evaluation APIs.',
+            icon: 'backend',
+          },
+          {
+            name: 'PostgreSQL + pgvector',
+            role: 'Stores runs, chunks, metadata, and embeddings for similarity-backed analysis.',
+            icon: 'database',
+          },
+          {
+            name: 'Hybrid Scoring Engine',
+            role: 'Combines heuristic checks with LLM-as-judge scoring for stronger signal.',
+            icon: 'evaluator',
+          },
+          {
+            name: 'Diagnostics UI',
+            role: 'Makes run-level breakdowns inspectable so engineers can locate where failures originated.',
+            icon: 'frontend',
+          },
+        ],
+      },
+      decisions: {
+        title: 'Key Technical Decisions & Trade-offs',
+        items: [
+          {
+            heading: 'Why hybrid scoring?',
+            decision: 'Combined deterministic heuristics with LLM-as-judge evaluation.',
+            tradeoff:
+              'Rule-based checks are reliable but shallow; judge models are expressive but noisy. Hybrid scoring gives stronger coverage across hard and semantic failures.',
+          },
+          {
+            heading: 'Why Postgres + pgvector?',
+            decision: 'Kept structured trace metadata and embedding search in one system.',
+            tradeoff:
+              'Dedicated vector databases can scale differently, but Postgres + pgvector simplified joins and experiment analysis.',
+          },
+          {
+            heading: 'Why trace-first design?',
+            decision: 'Stored full intermediate artifacts, not just final scores.',
+            why:
+              'Without trace artifacts, failure diagnosis becomes guesswork and experiments are hard to compare meaningfully.',
+          },
+        ],
+      },
+      performance: {
+        title: 'Quantified Impact & Performance',
+        metrics: [
+          {
+            label: 'Experiment depth',
+            value: 'Ran 208 traced evaluation runs across 52 benchmark queries.',
+            icon: 'throughput',
+          },
+          {
+            label: 'Failure diagnosis quality',
+            value: 'Diagnosed failures across retrieval, chunking, grounding, and generation rather than collapsing everything to one metric.',
+            icon: 'accuracy',
+          },
+          {
+            label: 'Debugging clarity',
+            value: 'Reduced ambiguity by making each run inspectable at chunk and context level across prompt/retriever variants.',
+            icon: 'reliability',
+          },
+        ],
+      },
+      scar: {
+        title: 'The "False Pass" Problem',
+        problem:
+          'Some answers sounded plausible and passed naive judging despite weak grounding in retrieved evidence.',
+        fix: [
+          'Split evaluation into layered checks: retrieval relevance, context support, answer grounding, and final response quality.',
+          'Added trace-level evidence checks to verify answers were actually supported by retrieved context.',
+          'Prevented semantically plausible but unsupported answers from inflating quality scores.',
+        ],
+      },
+      takeaway:
+        'A strong RAG evaluator cannot judge only the final answer; it must inspect the full path that produced it.',
+    },
+  },
   'smarthire-ai': {
     id: 'smarthire-ai',
     title: 'SmartHire: Intelligent Recruitment & Semantic Matching Engine',
@@ -356,7 +617,7 @@ export const projectsData: Record<string, Project> = {
     description:
       'Automating candidate evaluation through NLP, hybrid databases, and explainable analytics for recruiter decision support.',
     longDescription:
-      'SmartHire addresses the “Resume Black Hole” by replacing brittle keyword matching with semantic intent matching. It ingests messy PDFs, converts resumes and job descriptions into embeddings, and ranks candidates using cosine similarity — backed by a hybrid SQL + NoSQL storage strategy and a transparent analytics dashboard.',
+      'SmartHire addresses the "Resume Black Hole" by replacing brittle keyword matching with semantic intent matching. It ingests messy PDFs, converts resumes and job descriptions into embeddings, and ranks candidates using cosine similarity backed by a hybrid SQL + NoSQL storage strategy and a transparent analytics dashboard.',
     tags: [
       'Python',
       'Flask',
@@ -370,7 +631,7 @@ export const projectsData: Record<string, Project> = {
     ],
     image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=600&fit=crop',
     github: 'https://github.com/samarthshete/SmartHire',
-    demo: '#',
+    demo: '',
     date: 'Jan 2024 - Present',
     team: 'Solo Project',
     features: [
@@ -382,42 +643,41 @@ export const projectsData: Record<string, Project> = {
     ],
     challenges: 'PDF parsing noise, model memory bottlenecks, and keeping the UI responsive during heavy inference.',
     impact:
-      'Automated screening of 100+ resumes in <10 seconds, improved matching quality beyond keyword ATS, and enabled fast analytics via indexed logs.',
-
+      'Automated screening of 100+ resumes in under 10 seconds, improved matching quality beyond keyword ATS, and enabled fast analytics via indexed logs.',
     caseStudy: {
       headline:
-        'SmartHire solves semantic gap analysis in hiring — evaluating candidates by the intent and depth of experience, not buzzword matches.',
+        'SmartHire solves semantic gap analysis in hiring by evaluating candidates by intent and depth of experience, not buzzword matches.',
       engineeringChallenge: {
         title: 'The Engineering Challenge',
         bullets: [
           'Recruiters waste hours manually screening PDFs and still miss top candidates due to keyword mismatch.',
-          'Keyword-based ATS fails when “AWS” is written as “Cloud Expert” or “Microservices” is described as “Distributed Systems.”',
+          'Keyword-based ATS fails when equivalent concepts are phrased differently.',
           'SmartHire targets the semantic gap: match meaning, not string equality.',
         ],
       },
       architecture: {
         title: 'Technical Architecture: Hybrid Data Strategy',
         summary:
-          'Instead of forcing one database to do everything, SmartHire uses the best storage engine per data type.',
+          'SmartHire uses the best storage engine per data type instead of forcing one database to handle everything.',
         agents: [
           {
             name: 'SQL Store (SQLAlchemy/SQLite)',
-            role: 'Structured relational data: user profiles, job metadata, and application status with ACID guarantees.',
+            role: 'Structured relational data for user profiles, job metadata, and application status with ACID guarantees.',
             icon: 'database',
           },
           {
             name: 'NoSQL Store (MongoDB)',
-            role: 'Unstructured high-volume data: raw interview transcripts and AI feedback logs with flexible schema evolution.',
+            role: 'Unstructured high-volume data for transcripts and AI feedback logs with flexible schema evolution.',
             icon: 'database',
           },
           {
             name: 'NLP Engine (Hugging Face)',
-            role: 'Sentence-Transformers generate embeddings for resumes and JDs; cosine similarity yields a scoring signal.',
+            role: 'Sentence-Transformers generate embeddings for resumes and job descriptions; cosine similarity produces ranking scores.',
             icon: 'nlp',
           },
           {
             name: 'Decision Support UI',
-            role: 'Dashboard surfaces rankings, score distributions, and analytics so recruiters can trust + interpret results.',
+            role: 'Dashboard surfaces rankings and score distributions for explainable recruiter workflows.',
             icon: 'frontend',
           },
         ],
@@ -428,27 +688,25 @@ export const projectsData: Record<string, Project> = {
           {
             heading: 'Deterministic vs Probabilistic Matching',
             decision:
-              'Replaced keyword matching with semantic embeddings (latent space) using Hugging Face Transformers + cosine similarity.',
+              'Replaced keyword matching with semantic embeddings using transformers and cosine similarity.',
             logic:
-              'The model maps related concepts (e.g., “Distributed Systems” ↔ “Microservices”), improving match quality even when phrasing differs.',
+              'Latent-space matching captures related concepts even when exact keywords differ.',
             impact:
-              'Increased matching accuracy by ~30% compared to traditional keyword-based ATS logic.',
+              'Improved matching quality compared to traditional keyword-driven ATS logic.',
           },
           {
             heading: 'Robust PDF Ingestion Pipeline',
             decision:
-              'Built a coordinate-aware extraction pipeline with PDFPlumber + a cleaning layer (non-ASCII stripping, whitespace normalization).',
+              'Built coordinate-aware extraction with PDFPlumber plus cleaning for non-ASCII noise and whitespace normalization.',
             tradeoff:
-              'More engineering than plain text extraction, but significantly higher input quality for downstream embeddings.',
-            why:
-              'Resumes often include multi-column layouts, tables, icons, and inconsistent formatting that breaks naive parsing.',
+              'More engineering effort than plain text extraction, but significantly better input quality for downstream embeddings.',
           },
           {
-            heading: 'Real-time Analytics Dashboard (Explainability)',
+            heading: 'Explainability Dashboard',
             decision:
-              'Implemented a visualization layer (Flask + JS) to surface top performers and score distributions.',
+              'Added score distributions and top-performer analytics to make model outputs transparent.',
             why:
-              'Moved the product from “black box AI” to “transparent decision support,” helping recruiters understand why a candidate ranks high.',
+              'Moved the product from black-box scoring to decision support recruiters can trust.',
           },
         ],
       },
@@ -456,38 +714,36 @@ export const projectsData: Record<string, Project> = {
         title: 'Quantified Engineering Impact',
         metrics: [
           {
-            label: 'Reduced screening latency',
-            value: 'Automated initial screening of 100+ resumes in <10 seconds (previously hours manually).',
+            label: 'Screening latency',
+            value: 'Automated initial screening of 100+ resumes in under 10 seconds.',
             icon: 'latency',
           },
           {
-            label: 'High precision ranking',
-            value: 'Strong correlation between AI “Top 3” and expert manual hiring choices.',
+            label: 'Ranking quality',
+            value: 'Higher agreement with expert selections than keyword-only baseline logic.',
             icon: 'accuracy',
           },
           {
-            label: 'Scalable analytics throughput',
-            value: 'MongoDB indexed on job_id + candidate_id for sub-second interview analytics retrieval at scale.',
+            label: 'Analytics throughput',
+            value: 'Indexed retrieval supports responsive candidate analytics at scale.',
             icon: 'throughput',
           },
         ],
       },
       scar: {
-        title: 'The “Engineering Scar”',
+        title: 'The "Engineering Scar"',
         problem:
-          'Transformer inference inside the Flask process created high memory overhead and slow UI responsiveness under load.',
+          'Transformer inference inside the Flask process created memory pressure and UI slowdowns under load.',
         fix: [
-          'Decoupled inference from the web server so heavy NLP work doesn’t block the main request loop.',
-          'Optimized model loading strategy (lazy loading) to reduce cold-start memory spikes.',
-          'Kept the UX responsive even during large batch processing and analytics refresh.',
+          'Decoupled heavy inference from the request path.',
+          'Optimized loading strategy to reduce cold-start spikes.',
+          'Maintained responsive UX during batch processing.',
         ],
       },
       takeaway:
-        'SmartHire is built like a real production hiring system: semantic matching, hybrid persistence, explainable analytics, and inference isolation for responsiveness.',
+        'SmartHire combines semantic matching, hybrid persistence, and explainable analytics to solve real hiring workflow pain points.',
     },
   },
-
-  // ✅ InterviewIQ
   interviewiq: {
     id: 'interviewiq',
     title: 'InterviewIQ: Multi-Agent AI Orchestration',
@@ -495,7 +751,7 @@ export const projectsData: Record<string, Project> = {
     description:
       'High-performance multi-agent LLM system for adaptive technical assessments with shared state, recovery-safe sessions, and real-time pivots.',
     longDescription:
-      'InterviewIQ is a decentralized 4-agent system that runs an interview like a human: it evaluates answers in real time, updates a global state, and decides when to drill down or pivot based on performance. The system is designed for reliability, low latency streaming, and coverage-aware progression.',
+      'InterviewIQ is a decentralized 4-agent system that runs interviews like a human. It evaluates answers in real time, updates global state, and decides when to drill down or pivot based on performance. The platform is designed for low-latency streaming, reliability, and coverage-aware progression.',
     tags: [
       'LlamaIndex',
       'RAG',
@@ -507,7 +763,7 @@ export const projectsData: Record<string, Project> = {
     ],
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&h=600&fit=crop',
     github: 'https://github.com/samarthshete/InterviewIQ',
-    demo: '#',
+    demo: '',
     date: 'Aug 2023 - Dec 2023',
     team: 'Solo (Architecture) + Test Users',
     features: [
@@ -515,47 +771,47 @@ export const projectsData: Record<string, Project> = {
       'Topic graph + state machine for pivot vs deep-dive decisions',
       '6-dimension evaluation loop feeding back into question selection',
       'Streaming UX optimized for fast time-to-first-token',
-      'Crash-safe JSON session manager for resume/recovery',
-      'Coverage tracker to prevent agent looping and maintain pacing',
+      'Crash-safe session manager for resume/recovery',
+      'Coverage tracker to prevent looping and maintain pacing',
     ],
     challenges:
-      'Agent looping, state consistency across agents, low-latency streaming, and recovery-safe persistence without losing interview context.',
+      'Agent looping, state consistency across agents, low-latency streaming, and reliable recovery without losing context.',
     impact:
-      '92% correlation to human scoring (20+ tests), <200ms time-to-first-token, and 100% recovery in interruption simulations.',
+      'Reached high correlation with human scoring in tests, sub-200ms time-to-first-token, and robust recovery in interruption simulations.',
     caseStudy: {
       headline:
-        'A decentralized 4-agent interview system that evaluates, adapts, and pivots like a human interviewer — not a linear script.',
+        'A decentralized 4-agent interview system that evaluates, adapts, and pivots like a human interviewer rather than a fixed script.',
       engineeringChallenge: {
         title: 'The Engineering Challenge',
         bullets: [
-          'Building an AI interviewer isn’t hard — building one that adapts in real-time like a human is.',
-          'Most AI interviewers are linear scripts. InterviewIQ solves the “Stiffness Problem” using a 4-agent decentralized architecture.',
-          'It evaluates answers, updates global state, and decides when to drill down vs pivot based on candidate performance.',
+          'Building an AI interviewer is easy; building one that adapts in real-time is hard.',
+          'Most interview agents are linear scripts with weak adaptation.',
+          'InterviewIQ uses a shared-state multi-agent loop to support deep dives and pivots.',
         ],
       },
       architecture: {
         title: 'System Architecture & Logic',
         summary:
-          'Instead of one massive prompt, InterviewIQ decouples responsibilities into specialized agents connected via shared state.',
+          'InterviewIQ decouples responsibilities into specialized agents connected through shared state and recovery-safe persistence.',
         agents: [
           {
             name: 'Orchestrator',
-            role: 'Runs resume/JD RAG and manages global interview state across the session.',
+            role: 'Runs resume/JD retrieval and manages global interview state.',
             icon: 'orchestrator',
           },
           {
-            name: 'TopicManager (State Machine)',
-            role: 'Maintains the interview graph, tracks coverage, and chooses the next optimal path (pivot vs deep dive).',
+            name: 'TopicManager',
+            role: 'Maintains interview graph, tracks coverage, and selects next path.',
             icon: 'topic',
           },
           {
-            name: 'Interviewer (UI/UX)',
-            role: 'Handles persona, streaming delivery, and question framing for a natural experience.',
+            name: 'Interviewer',
+            role: 'Handles persona, streaming delivery, and question framing.',
             icon: 'interviewer',
           },
           {
-            name: 'Evaluator (The Brain)',
-            role: 'Scores responses across 6 dimensions (technical, clarity, communication, etc.) and feeds signals back into the loop.',
+            name: 'Evaluator',
+            role: 'Scores responses across multiple dimensions and feeds signals back into progression logic.',
             icon: 'evaluator',
           },
         ],
@@ -564,23 +820,25 @@ export const projectsData: Record<string, Project> = {
         title: 'Key Technical Decisions & Trade-offs',
         items: [
           {
-            heading: 'Why LlamaIndex 0.11.0 for orchestration?',
+            heading: 'Agent Orchestration Strategy',
             decision:
-              'Chose LlamaIndex over LangChain for structured retrieval and event-driven coordination with shared state persistence.',
+              'Used LlamaIndex-centered orchestration for structured retrieval and event-driven coordination.',
             tradeoff:
-              'Steeper learning curve for custom agents, but enabled reliable shared memory so the system doesn’t “forget” earlier context.',
+              'Higher implementation complexity, but stronger shared memory and adaptive behavior.',
           },
           {
-            heading: 'Adaptive Difficulty Algorithm (“Flow State”)',
-            decision: 'Implemented 3-tier difficulty: Surface → Medium → Deep.',
+            heading: 'Adaptive Difficulty',
+            decision:
+              'Implemented a three-tier progression system (Surface -> Medium -> Deep) based on evaluator signals.',
             logic:
-              'If the Evaluator returns >8.5/10 for two consecutive questions, TopicManager triggers Deep Dive to generate edge-case/system design prompts.',
+              'High confidence answers trigger deeper follow-ups; weak answers trigger pivots for broader coverage.',
           },
           {
-            heading: 'Real-time Persistence & Recovery',
-            decision: 'Engineered a JSON-based session manager for multi-agent state recovery.',
-            why:
-              'If the API fails or the process crashes, the session resumes exactly where it left off without losing progress.',
+            heading: 'Session Recovery',
+            decision:
+              'Engineered persistent session state so interrupted interviews can resume without context loss.',
+            impact:
+              'Improved resilience and user trust in longer interview workflows.',
           },
         ],
       },
@@ -589,35 +847,33 @@ export const projectsData: Record<string, Project> = {
         metrics: [
           {
             label: 'Latency',
-            value:
-              'Optimized streaming (Rich + OpenAI streaming API), reducing time-to-first-token to <200ms.',
+            value: 'Streaming optimizations reduced time-to-first-token to under 200ms.',
             icon: 'latency',
           },
           {
-            label: 'Accuracy',
-            value:
-              '92% correlation between AI evaluation and human assessment across 20+ test cases.',
+            label: 'Evaluation agreement',
+            value: 'Strong alignment with human interview scoring across tested scenarios.',
             icon: 'accuracy',
           },
           {
             label: 'Reliability',
-            value: '100% recovery rate during simulated interruptions via session manager.',
+            value: 'Recovery-safe sessions supported consistent resume-after-failure behavior.',
             icon: 'reliability',
           },
         ],
       },
       scar: {
-        title: 'The “Engineering Scar”',
+        title: 'The "Engineering Scar"',
         problem:
-          'Agent looping: Evaluator + TopicManager repeatedly requested the same depth, stalling the interview.',
+          'Evaluator and topic logic sometimes looped, repeatedly requesting the same depth and stalling the interview.',
         fix: [
-          'Implemented a Coverage Tracker inside TopicManager.',
-          'Used bitmask-style logic to mark topics “exhausted” after depth thresholds.',
-          'Forced forward progress by compelling the Orchestrator to pivot once coverage is satisfied.',
+          'Added coverage tracking and exhaustion thresholds for topics.',
+          'Forced progression rules to trigger pivots once coverage goals were met.',
+          'Stabilized interview pacing while preserving adaptivity.',
         ],
       },
       takeaway:
-        'InterviewIQ is built for real interview dynamics: adaptive difficulty, coverage-aware progression, shared memory, and recovery-safe sessions.',
+        'InterviewIQ demonstrates adaptive multi-agent orchestration with practical reliability and performance characteristics.',
     },
   },
 
@@ -1145,25 +1401,29 @@ export default function ProjectDetail() {
           <span className="text-sm">{project?.team}</span>
         </div>
 
-        <a
-          href={project?.github || '#'}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-background/50 dark:bg-background/30 border border-white/10 dark:border-white/10 hover:bg-white/5 transition-colors"
-        >
-          <Github className="w-4 h-4" />
-          <span className="text-sm font-medium">View Code</span>
-        </a>
+        {project && isExternalUrl(project.github) && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-background/50 dark:bg-background/30 border border-white/10 dark:border-white/10 hover:bg-white/5 transition-colors"
+          >
+            <Github className="w-4 h-4" />
+            <span className="text-sm font-medium">View Code</span>
+          </a>
+        )}
 
-        <a
-          href={project?.demo || '#'}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-primary dark:bg-accent text-white hover:shadow-lg transition-all"
-        >
-          <ExternalLink className="w-4 h-4" />
-          <span className="text-sm font-medium">Live Demo</span>
-        </a>
+        {project && isExternalUrl(project.demo) && (
+          <a
+            href={project.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-primary dark:bg-accent text-white hover:shadow-lg transition-all"
+          >
+            <ExternalLink className="w-4 h-4" />
+            <span className="text-sm font-medium">Live Demo</span>
+          </a>
+        )}
       </div>
     ),
     [project]

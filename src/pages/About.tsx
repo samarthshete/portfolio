@@ -4,22 +4,22 @@ import { Code, Cpu, Cloud, Zap } from 'lucide-react'
 const skills = [
   {
     category: 'Languages',
-    items: ['Python', 'JavaScript/TypeScript', 'SQL', 'Go'],
+    items: ['Python', 'JavaScript', 'TypeScript', 'SQL'],
     icon: Code,
   },
   {
-    category: 'AI/ML',
-    items: ['TensorFlow', 'PyTorch', 'LangChain', 'Scikit-learn', 'Hugging Face'],
+    category: 'Backend & APIs',
+    items: ['FastAPI', 'Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'Redis'],
     icon: Cpu,
   },
   {
     category: 'Cloud & DevOps',
-    items: ['AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Terraform'],
+    items: ['AWS (EC2, ECR, CloudFront)', 'Docker', 'GitHub Actions', 'CI/CD', 'NGINX'],
     icon: Cloud,
   },
   {
-    category: 'Frameworks',
-    items: ['React', 'Flask', 'FastAPI', 'Node.js', 'Express'],
+    category: 'Frontend & Security',
+    items: ['React 18', 'Next.js', 'JWT', 'RBAC', 'OAuth2', 'CSP'],
     icon: Zap,
   },
 ]
@@ -32,7 +32,7 @@ export function AboutSection() {
           About Me
         </h1>
         <p className="text-xl text-foreground/60 dark:text-white/60 max-w-2xl">
-          Software engineer passionate about AI, cloud architecture, and building products that make a difference.
+          Full-stack engineer focused on production systems, API automation, cloud delivery, and measurable performance gains.
         </p>
       </motion.div>
 
@@ -42,18 +42,18 @@ export function AboutSection() {
             <h2 className="text-2xl font-semibold text-foreground dark:text-white mb-4">My Story</h2>
             <div className="space-y-4 text-foreground/70 dark:text-white/70 leading-relaxed">
               <p>
-                I'm a software engineer currently pursuing my MS in Computer Science at The George Washington University. Specializing in full-stack development, AI/ML and cloud-native applications.
-                My journey in tech started with a fascination for how machines learn and has evolved into building
-                production systems that serve millions of users.  
+                I&apos;m a software engineer currently pursuing an MS in Computer Science at The George Washington University.
+                I specialize in full-stack development, API integrations, and cloud-native delivery with a focus on systems
+                that are reliable under real production constraints.
               </p>
               <p>
-                Over the past few years, I’ve worked across the stack — from training custom ML models to architecting
-                scalable microservices and crafting responsive UIs. I believe in writing clean, maintainable code and
-                building products that solve real problems.
+                Across recent roles, I&apos;ve shipped automation and platform improvements including media workflow integrations,
+                high-throughput backend APIs, performance optimization, CI/CD pipelines, and security hardening for
+                production web applications.
               </p>
               <p>
-                When I'm not coding, you'll find me exploring new ML research papers, contributing to open-source
-                projects, or enjoying a cup of chai (always better than coffee!).
+                I care about clean architecture, measurable impact, and developer workflows that make systems easier to
+                ship, monitor, and improve.
               </p>
             </div>
           </div>
@@ -65,19 +65,19 @@ export function AboutSection() {
             <ul className="space-y-4 text-foreground/70 dark:text-white/70">
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-accent mt-2 flex-shrink-0" />
-                <span>Design and train machine learning models for real-world applications</span>
+                <span>Automate multi-system workflows with reliable API integrations and reconciliation pipelines</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-accent mt-2 flex-shrink-0" />
-                <span>Build scalable cloud infrastructure and microservices architectures</span>
+                <span>Build and optimize backend services for low latency, high throughput, and data consistency</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-accent mt-2 flex-shrink-0" />
-                <span>Develop full-stack applications with modern frameworks and tools</span>
+                <span>Ship full-stack products with modern React and Node stacks, performance tuning, and observability</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-accent mt-2 flex-shrink-0" />
-                <span>Mentor junior engineers and contribute to technical documentation</span>
+                <span>Implement security and delivery standards including JWT, RBAC, OAuth2, CSP, Docker, and CI/CD</span>
               </li>
             </ul>
           </div>

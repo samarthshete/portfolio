@@ -4,6 +4,8 @@ import { ArrowRight, Github, ExternalLink } from 'lucide-react'
 import { projectsData, type Project } from './ProjectDetail'
 import { useMemo } from 'react'
 
+const isExternalUrl = (url?: string) => /^https?:\/\//.test(url ?? '')
+
 export default function Projects() {
   const navigate = useNavigate()
 
@@ -63,26 +65,30 @@ export default function Projects() {
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <a
-                href={project.github || '#'}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="text-foreground/60 dark:text-white/60 hover:text-primary dark:hover:text-accent transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href={project.demo || '#'}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="text-foreground/60 dark:text-white/60 hover:text-primary dark:hover:text-accent transition-colors"
-                aria-label="Live Demo"
-              >
-                <ExternalLink className="w-5 h-5" />
-              </a>
+              {isExternalUrl(project.github) && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-foreground/60 dark:text-white/60 hover:text-primary dark:hover:text-accent transition-colors"
+                  aria-label="GitHub"
+                >
+                  <Github className="w-5 h-5" />
+                </a>
+              )}
+              {isExternalUrl(project.demo) && (
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-foreground/60 dark:text-white/60 hover:text-primary dark:hover:text-accent transition-colors"
+                  aria-label="Live Demo"
+                >
+                  <ExternalLink className="w-5 h-5" />
+                </a>
+              )}
             </div>
 
             <div className="flex items-center gap-2 text-primary dark:text-accent group-hover:gap-3 transition-all">

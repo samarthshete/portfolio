@@ -18,9 +18,14 @@ import { useNavigate } from 'react-router-dom'
 import { projectsData, type Project } from './ProjectDetail'
 
 const roles = ['AI/ML Engineer', 'Software Engineer', 'Cloud Architect', 'Full-Stack Developer']
+const isExternalUrl = (url?: string) => /^https?:\/\//.test(url ?? '')
 
 // ✅ Only 3 featured projects on Home
-const FEATURED_IDS = ['interviewiq', 'smarthire-ai', 'cloud-native-3tier']
+const FEATURED_IDS = [
+  'agentshield-security-evaluation-for-mcp-agents',
+  'contextlens-rag-evaluation-debugging-platform',
+  'cloud-native-3tier',
+]
 
 export default function Home() {
   const navigate = useNavigate()
@@ -125,27 +130,31 @@ export default function Home() {
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <a
-              href={project.github || '#'}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="text-foreground/60 dark:text-white/60 hover:text-primary dark:hover:text-accent transition-colors"
-              aria-label="GitHub"
-            >
-              <Github className="w-5 h-5" />
-            </a>
+            {isExternalUrl(project.github) && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="text-foreground/60 dark:text-white/60 hover:text-primary dark:hover:text-accent transition-colors"
+                aria-label="GitHub"
+              >
+                <Github className="w-5 h-5" />
+              </a>
+            )}
 
-            <a
-              href={project.demo || '#'}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="text-foreground/60 dark:text-white/60 hover:text-primary dark:hover:text-accent transition-colors"
-              aria-label="Live Demo"
-            >
-              <ExternalLink className="w-5 h-5" />
-            </a>
+            {isExternalUrl(project.demo) && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="text-foreground/60 dark:text-white/60 hover:text-primary dark:hover:text-accent transition-colors"
+                aria-label="Live Demo"
+              >
+                <ExternalLink className="w-5 h-5" />
+              </a>
+            )}
           </div>
 
           <div className="inline-flex items-center gap-2 text-primary dark:text-accent font-medium">

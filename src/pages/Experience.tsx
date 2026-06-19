@@ -4,64 +4,56 @@ import { Briefcase, Calendar } from 'lucide-react'
 const experiences = [
   {
     company: 'George Washington University — Law Media Center',
-    role: 'Technical Support Assistant',
-    period: 'May 2025 - Present',
+    role: 'Technical Assistant',
+    period: 'May 2025 - May 2026',
     description:
-      'Keep course recordings reliable at scale through media ops and classroom AV monitoring.',
+      'Automated media operations across law-school recording workflows with API-first integrations and same-day issue detection.',
     achievements: [
-      'Automated Canvas/Kaltura/Epiphan publishing so 1,000+ class recordings go out on time',
-      'Built real-time incident dashboards and alerts to surface issues fast',
-      'Added AV/media server health checks to catch 200+ issues before class',
+      'Removed manual MediaSpace entry for 300+ weekly recordings by integrating Kaltura, Epiphan Cloud, and Canvas APIs across 80+ law courses',
+      'Cut mean time-to-detect from ~48 hours to under 4 by building a daily Kaltura, Zoom, and Freshdesk reconciliation job',
     ],
-    technologies: ['Python', 'Canvas API', 'Kaltura', 'Epiphan', 'Splunk', 'AWS', 'Freshdesk'],
+    technologies: ['Python', 'Kaltura API', 'Epiphan Cloud API', 'Canvas API', 'Zoom API', 'Freshdesk API'],
   },
   {
-    company: 'George Washington University ',
-    role: 'Graduate Teaching Assistant',
-    period: 'Dec 2025 - Present',
-    description:
-      'Support graduate-level coursework by assisting with instruction, grading, and student mentorship, with a focus on Python-based optimization and data-driven decision models.',
-    achievements: [
-      'Debug and validate Python-based pricing and revenue optimization assignments, ensuring correctness of algorithms and adherence to modeling assumptions under capacity constraints.',
-      'Lead weekly office hours and code reviews for 60+ graduate students, reinforcing clean code practices, algorithmic thinking, and data-driven problem-solving.',
-      'Assist with grading, assignment design, and exam preparation, providing clear, actionable technical feedback to improve student understanding and performance.',
-    ],
-    technologies: [
-      'Python',
-      'NumPy',
-      'Pandas',
-      'Jupyter Notebook',
-      'Optimization Models',
-      'Git',
-      'Canvas LMS',
-    ],
-  },
-  {
-    company: 'Tecspeak IT Solution',
+    company: 'Tecspeak IT Solutions',
     role: 'Software Developer',
     period: 'Jul 2022 - Mar 2024',
     description:
-      'Delivered full-stack features end to end with a focus on speed and reliability.',
+      'Shipped full-stack commerce and platform systems with measurable gains in performance, reliability, and deployment speed.',
     achievements: [
-      'Shipped React/Node/MongoDB features with reusable components and clean APIs',
-      'Reduced slow queries using Redis caching and better indexing',
-      'Containerized services and added CI/CD on EKS to ship faster',
+      'Improved Lighthouse from ~65 to ~92 (~40% faster loads) using Next.js SSR, code-splitting, and CloudFront CDN',
+      'Scaled Node.js/Express/MongoDB services to ~30K requests/day at sub-400ms with Redis caching and indexing; cut quarterly report API from ~20s to ~7s via FastAPI + SQL',
+      'Reduced deploy time from ~2 hours to ~30 minutes with Docker + GitHub Actions on AWS (EC2, ECR) behind NGINX and contributed to zero-downtime Node.js v16 to v22 upgrade across 7 services',
+      'Improved load times ~25% by migrating Angular modules to React 18 + TypeScript and implementing JWT, RBAC, OAuth2, and CSP',
     ],
-    technologies: ['React', 'Node.js', 'MongoDB', 'Redis', 'Docker', 'Amazon EKS', 'GitHub Actions'],
+    technologies: [
+      'Next.js',
+      'TypeScript',
+      'Node.js',
+      'Express',
+      'MongoDB',
+      'Redis',
+      'FastAPI',
+      'SQL',
+      'Docker',
+      'GitHub Actions',
+      'AWS',
+      'NGINX',
+    ],
   },
   {
-    company: 'VG Computers',
-    role: 'Machine Learning Intern',
-    period: 'Nov 2021 - May 2022',
+    company: 'Vipul Enterprise',
+    role: 'System Engineer',
+    period: 'Jun 2021 - Jun 2022',
     description:
-      'Prototyped and shipped ML features with clear product impact.',
+      'Built backend inventory systems focused on transactional accuracy, query performance, and operational automation.',
     achievements: [
-      'Trained an XGBoost fraud model and raised accuracy by ~18%',
-      'Built a real-time recommender on PyTorch/SageMaker that lifted engagement ~20%',
-      'Set up MLflow/Airflow/Docker so retraining and deploys run on autopilot',
+      'Raised stock accuracy from ~92% to ~99% and eliminated overselling by implementing FastAPI order/inventory APIs with stock reservations and row-level locking across ~10K SKUs and 5 warehouses',
+      'Reduced stock-report p95 latency ~75% (1.4s to 350ms) by optimizing PostgreSQL with composite indexes and N+1 removal',
+      'Removed ~2 hours/day of manual monitoring by automating low-stock alerts with Celery and Redis',
     ],
-    technologies: ['Python', 'XGBoost', 'PyTorch', 'SageMaker', 'MLflow', 'Airflow', 'Docker'],
-  }
+    technologies: ['FastAPI', 'PostgreSQL', 'Celery', 'Redis', 'Python'],
+  },
 ]
 
 // ✅ NEW: reusable export for Home
