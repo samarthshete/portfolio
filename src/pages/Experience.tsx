@@ -3,56 +3,171 @@ import { Briefcase, Calendar } from 'lucide-react'
 
 const experiences = [
   {
-    company: 'George Washington University — Law Media Center',
+    company: 'Adobe, VA',
+    role: 'AI Engineer',
+    period: 'Mar 2026 – Present',
+    description:
+      'Building production RAG systems, autonomous agent workflows, and LLM evaluation infrastructure for enterprise-scale document intelligence.',
+    achievements: [
+      'Architected a production-grade RAG pipeline using LangChain, OpenAI API, and pgvector on AWS RDS, processing 50K+ enterprise documents with semantic search, which improved information retrieval accuracy by 42%',
+      'Built an autonomous AI agent framework with FastAPI and Python, implementing agentic workflows for document analysis and summarization, handling 10K+ daily requests, which automated 70%',
+      'Deployed LLM guardrails and prompt injection detection using custom adversarial testing frameworks, reducing security vulnerabilities by 65% and achieving 99.2% detection rate against malicious prompts across production models',
+      'Designed and implemented an LLM-as-a-Judge evaluation pipeline with structured logging via OpenTelemetry and Prometheus, monitoring 15+ performance metrics across 3 model versions, which accelerated model iteration cycles by 55%',
+    ],
+    technologies: [
+      'Python',
+      'LangChain',
+      'OpenAI API',
+      'RAG',
+      'pgvector',
+      'FastAPI',
+      'AWS RDS',
+      'OpenTelemetry',
+      'Prometheus',
+      'LLMs',
+    ],
+  },
+  {
+    company: 'The George Washington University School of Business',
+    role: 'Graduate Teaching Assistant',
+    period: 'Jan 2026 - May 2026',
+    description:
+      'Support graduate level analytics coursework by mentoring students on machine learning pipelines, cloud deployment, and engineering best practices.',
+    achievements: [
+      'Mentor 60+ graduate students on building ML pipelines using scikit-learn and PyTorch, guiding them from theoretical models to working implementations',
+      'Conduct weekly office hours and debugging sessions helping students troubleshoot data pipelines, model training issues, and AWS deployment environments',
+      'Review project code and enforce production grade engineering practices including logging, unit testing, and IAM security configurations',
+      'Collaborate with faculty on assessment grading and identifying recurring conceptual gaps to improve student performance across course and projects',
+      'Supported 15+ graduate ML projects end-to-end, ensuring students delivered production-ready models with proper testing and cloud deployment',
+    ],
+    technologies: [
+      'Python',
+      'scikit-learn',
+      'PyTorch',
+      'Machine Learning',
+      'AWS',
+      'Git',
+    ],
+  },
+  {
+    company: 'The George Washington University Law School',
     role: 'Technical Assistant',
     period: 'May 2025 - May 2026',
     description:
-      'Automated media operations across law-school recording workflows with API-first integrations and same-day issue detection.',
+      'Built internal automation tooling for academic media operations, turning fragile manual workflows into reliable API-driven publishing pipelines.',
     achievements: [
-      'Removed manual MediaSpace entry for 300+ weekly recordings by integrating Kaltura, Epiphan Cloud, and Canvas APIs across 80+ law courses',
-      'Cut mean time-to-detect from ~48 hours to under 4 by building a daily Kaltura, Zoom, and Freshdesk reconciliation job',
-    ],
-    technologies: ['Python', 'Kaltura API', 'Epiphan Cloud API', 'Canvas API', 'Zoom API', 'Freshdesk API'],
-  },
-  {
-    company: 'Tecspeak IT Solutions',
-    role: 'Software Developer',
-    period: 'Jul 2022 - Mar 2024',
-    description:
-      'Shipped full-stack commerce and platform systems with measurable gains in performance, reliability, and deployment speed.',
-    achievements: [
-      'Improved Lighthouse from ~65 to ~92 (~40% faster loads) using Next.js SSR, code-splitting, and CloudFront CDN',
-      'Scaled Node.js/Express/MongoDB services to ~30K requests/day at sub-400ms with Redis caching and indexing; cut quarterly report API from ~20s to ~7s via FastAPI + SQL',
-      'Reduced deploy time from ~2 hours to ~30 minutes with Docker + GitHub Actions on AWS (EC2, ECR) behind NGINX and contributed to zero-downtime Node.js v16 to v22 upgrade across 7 services',
-      'Improved load times ~25% by migrating Angular modules to React 18 + TypeScript and implementing JWT, RBAC, OAuth2, and CSP',
+      'Removed manual MediaSpace entry for 300+ weekly recordings across 80+ law courses by building Python tooling on Kaltura, Epiphan Cloud, and Canvas APIs for scheduling, tagging, and reconciliation',
+      'Cut mean time-to-detect failed recordings from ~48 hours to under 4 by instrumenting a daily reconciliation workflow across Kaltura, Zoom, and Freshdesk REST APIs before issues reached faculty and students',
     ],
     technologies: [
-      'Next.js',
-      'TypeScript',
-      'Node.js',
-      'Express',
-      'MongoDB',
-      'Redis',
-      'FastAPI',
-      'SQL',
-      'Docker',
-      'GitHub Actions',
-      'AWS',
-      'NGINX',
+      'Python',
+      'Kaltura API',
+      'Epiphan Cloud API',
+      'Canvas API',
+      'Zoom API',
+      'Freshdesk API',
     ],
   },
   {
-    company: 'Vipul Enterprise',
-    role: 'System Engineer',
-    period: 'Jun 2021 - Jun 2022',
+    company: 'Virtual Infotech Solution, India',
+    role: 'Software Development Engineer',
+    period: 'May 2023 – Jul 2024',
     description:
-      'Built backend inventory systems focused on transactional accuracy, query performance, and operational automation.',
+      'Shipped ML-powered platforms, AWS microservices, and CI/CD infrastructure with measurable gains in accuracy, latency, and release velocity.',
     achievements: [
-      'Raised stock accuracy from ~92% to ~99% and eliminated overselling by implementing FastAPI order/inventory APIs with stock reservations and row-level locking across ~10K SKUs and 5 warehouses',
-      'Reduced stock-report p95 latency ~75% (1.4s to 350ms) by optimizing PostgreSQL with composite indexes and N+1 removal',
-      'Removed ~2 hours/day of manual monitoring by automating low-stock alerts with Celery and Redis',
+      'Designed predictive machine learning models using Scikit-learn and XGBoost for financial risk analysis, improving fraud detection precision by 14.8% while maintaining strict latency requirements',
+      'Architected a microservices-based document processing platform on AWS (EC2, Lambda, S3, RDS) using FastAPI and Python, processing 150K+ documents monthly, which reduced processing latency by 58%',
+      'Built an automated CI/CD pipeline using GitHub Actions and Docker, deploying containerized microservices to AWS EKS with zero-downtime rolling updates, reducing deployment time by 75% and increasing release frequency from bi-weekly to daily',
+      'Developed a real-time model monitoring dashboard with Prometheus and Grafana, tracking 20+ operational metrics and configuring intelligent alerts, which reduced mean-time-to-detection (MTTD) by 60%',
+      'Implemented asynchronous processing workflows using Python asyncio and Redis caching, optimizing API response times for LLM-powered features, achieving 3.2x throughput improvement and reducing average response latency from 1.2s to 380ms',
     ],
-    technologies: ['FastAPI', 'PostgreSQL', 'Celery', 'Redis', 'Python'],
+    technologies: [
+      'Python',
+      'FastAPI',
+      'Scikit-learn',
+      'XGBoost',
+      'AWS',
+      'Docker',
+      'GitHub Actions',
+      'EKS',
+      'Prometheus',
+      'Grafana',
+      'Redis',
+    ],
+  },
+  {
+    company: 'GirlScript Summer of Code',
+    role: 'GSSOC 2023 Contributor',
+    period: 'May 2023 - Aug 2023',
+    description:
+      "GirlScript Summer of Code is one of India's largest open source programs, connecting contributors with real-world projects maintained by active developer communities.",
+    achievements: [
+      'Reviewed codebases, submitted pull requests, and resolved issues across participating repositories',
+      'Collaborated with project maintainers on feature implementations, bug fixes, and documentation improvements',
+      'Worked within asynchronous, distributed engineering environments — learning how to communicate clearly through code and written reviews',
+    ],
+    technologies: ['GitHub', 'Git'],
+  },
+  {
+    company: 'Neon IT Systems, India',
+    role: 'Software Engineer',
+    period: 'Jun 2021 – Apr 2023',
+    description:
+      'Engineered full-stack product features and platform reliability where performance, test coverage, and team engineering practices drove measurable outcomes.',
+    achievements: [
+      'Engineered a full-stack web application with React, Node.js, and PostgreSQL, serving 30K+ monthly active users, which increased user engagement by 35% and reduced page load time by 50% through optimized bundling',
+      'Containerized the entire application stack using Docker and managed container orchestration with Kubernetes, improving development environment parity and reducing production deployment failures by 55%',
+      'Built an automated regression testing suite with Jest and Supertest, integrated into the CI/CD pipeline, achieving 87% test coverage and reducing post-deployment bug rates by 48%',
+      'Optimized SQL queries and implemented caching strategies with Redis, reducing database load by 40% and improving average database query response time from 850ms to 180ms',
+      'Led code review and established software engineering best practices (OOP, design patterns, SOLID principles) across a 5-member team, resulting in 30% reduction in technical debt and improving code maintainability scores by 25%',
+    ],
+    technologies: [
+      'React.js',
+      'Node.js',
+      'PostgreSQL',
+      'Docker',
+      'Kubernetes',
+      'Jest',
+      'Supertest',
+      'Redis',
+    ],
+  },
+  {
+    company: 'VG Computers',
+    role: 'Machine Learning Intern',
+    period: 'Nov 2020 - May 2021',
+    description:
+      'Worked on applied machine learning systems for fraud detection and automated recruitment analysis.',
+    achievements: [
+      'Built fraud detection models (XGBoost, scikit-learn) improving ROC-AUC 18% through feature engineering and hyperparameter tuning',
+      'Developed NLP resume parsing APIs using Flask/FastAPI to automate candidate-role matching for hiring workflows',
+      'Deployed ML pipelines on AWS SageMaker, enabling scalable model training and inference',
+      'Implemented automated retraining workflows using MLflow and Airflow for continuous model updates',
+      'Delivered two production ML systems — a fraud detection model and resume parser — running on automated AWS pipelines',
+    ],
+    technologies: [
+      'Python',
+      'XGBoost',
+      'scikit-learn',
+      'Flask',
+      'FastAPI',
+      'AWS SageMaker',
+      'MLflow',
+      'Airflow',
+    ],
+  },
+  {
+    company: 'H Globe Tech',
+    role: 'Trainee Python Developer',
+    period: 'Oct 2019 - Jan 2020',
+    description:
+      'Built IoT automation systems, sensor data pipelines, and billing APIs with Python and cloud-backed storage.',
+    achievements: [
+      'Developed and deployed a smart home automation system using Python, Flask, and IoT sensors, implementing adaptive scheduling algorithms that improved user convenience and achieved 20% energy savings',
+      'Built data pipelines with MongoDB and Apache Kafka, optimizing sensor data ingestion/storage and query response times through document indexing and aggregation pipelines',
+      'Crafted Billing APIs utilizing Flask, MongoDB, and AWS to efficiently store and retrieve billing reports, reduced computation costs and provided a valuable tool for debugging auto-generated bills',
+    ],
+    technologies: ['Python', 'Flask', 'MongoDB', 'Apache Kafka', 'AWS'],
   },
 ]
 
@@ -69,7 +184,7 @@ export function ExperienceSection() {
           Experience
         </h1>
         <p className="text-xl text-foreground/60 dark:text-white/60 max-w-2xl">
-          My professional journey in software engineering and AI/ML development.
+          Roles where I shipped production improvements, reduced operational risk, and learned by building.
         </p>
       </motion.div>
 

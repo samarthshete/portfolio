@@ -350,6 +350,141 @@ function QuickFacts({ project }: { project: Project }) {
 /* ----------------------------- DATA ----------------------------- */
 
 export const projectsData: Record<string, Project> = {
+  'agentscape-identity-trust-layer-for-ai-agents': {
+    id: 'agentscape-identity-trust-layer-for-ai-agents',
+    title: 'AgentScape: Identity & Trust Layer for AI Agents',
+    category: 'SDE',
+    description:
+      'A public registry where every AI agent is findable, verifiable, and machine-readable — dual-rendered for humans and for other AIs.',
+    longDescription:
+      'I reframed a "build Threads for agents" brief into a registry because agents have no ego or attention to drive a social feed — they need discovery and trust.\n\nAgentScape is a public registry where every AI agent is findable, verifiable, and machine-readable. Every page is dual-rendered from one canonical data model: a human HTML view plus a machine view (markdown twin, JSON-LD, and an /llms.txt index). That lets an LLM read the registry as easily as a person browses it.\n\nThe product is live in production with seeded and user-published agents, full-text search, Google OAuth, and an operator publishing dashboard — built on multi-tenant Postgres with row-level security tested adversarially.',
+    tags: [
+      'Next.js',
+      'TypeScript',
+      'Supabase',
+      'PostgreSQL',
+      'Row-Level Security',
+      'Google OAuth',
+      'JSON-LD',
+      'llms.txt',
+      'Vercel',
+    ],
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop',
+    github: '',
+    demo: 'https://agentscape-kappa.vercel.app',
+    date: '2026',
+    team: 'Solo Project',
+    features: [
+      'One data model rendered four ways: HTML, markdown twin, JSON-LD, and /llms.txt',
+      'Verifiable work-samples with structured proof payloads instead of social chatter',
+      'Unforgeable domain verification via /.well-known challenge and DB column-privilege lock',
+      'Multi-tenant Postgres with row-level security, tested adversarially',
+      'Google OAuth, full-text search, and an operator publishing dashboard',
+      'Server-rendered for fast loads on desktop and mobile',
+    ],
+    challenges:
+      'Keeping human polish and machine-legibility in sync from one source; making a verified badge an agent literally cannot forge; enforcing per-user write isolation under RLS.',
+    impact:
+      'Live in production with 21 seeded and user-published agents; independently reviewed 8.1/10 and advanced to a founding-engineer interview. Paste /llms.txt into any LLM and it reads the registry and recommends an agent.',
+    caseStudy: {
+      headline:
+        'The discovery-and-trust substrate for AI agents — readable by humans and machines.',
+      engineeringChallenge: {
+        title: 'The Engineering Challenge',
+        bullets: [
+          'Agents need discovery and trust, not engagement-driven social feeds.',
+          'Every page had to serve two audiences without the human and machine views drifting apart.',
+          'A "verified" badge had to be cryptographically and structurally unforgeable by the agent owner.',
+        ],
+      },
+      architecture: {
+        title: 'System Architecture & Logic',
+        summary:
+          'A single data-access layer feeds four renderers so humans and LLMs consume the same canonical registry.',
+        agents: [
+          {
+            name: 'Single Data-Access Layer',
+            role: 'Canonical agent, work-sample, and verification records in multi-tenant Postgres with RLS-enforced isolation.',
+            icon: 'database',
+          },
+          {
+            name: 'Human Renderer (HTML)',
+            role: 'Server-rendered Next.js pages for browsing, search, and operator publishing workflows.',
+            icon: 'frontend',
+          },
+          {
+            name: 'Machine Renderer (Markdown + JSON-LD)',
+            role: 'Markdown twins and structured JSON-LD so other AIs can parse agent identity and proof payloads.',
+            icon: 'backend',
+          },
+          {
+            name: 'Registry Index (/llms.txt)',
+            role: 'Machine-readable index that lets LLMs discover and recommend agents from the live registry.',
+            icon: 'realtime',
+          },
+        ],
+      },
+      decisions: {
+        title: 'Key Technical Decisions & Trade-offs',
+        items: [
+          {
+            heading: 'Registry over social feed',
+            decision:
+              'Built a findable, verifiable registry instead of a Threads-style agent social network.',
+            why:
+              'Agents do not have attention or ego; they need identity, discovery, and trust signals other systems can consume.',
+          },
+          {
+            heading: 'Verifiable work-samples over chatter',
+            decision:
+              'Structured proof payloads replace unstructured social posts as the primary credibility signal.',
+            impact:
+              'Made agent pages useful to both human reviewers and downstream AI systems evaluating capability.',
+          },
+          {
+            heading: 'Machine-readability as a first-class surface',
+            decision:
+              'Shipped markdown twins, JSON-LD, and /llms.txt alongside HTML from one canonical model.',
+            tradeoff:
+              'More rendering complexity upfront, but eliminates duplicate content maintenance and drift between audiences.',
+          },
+        ],
+      },
+      performance: {
+        title: 'Quantified Impact & Performance',
+        metrics: [
+          {
+            label: 'Production readiness',
+            value: 'Live deployment with 21 seeded and user-published agents on Vercel.',
+            icon: 'reliability',
+          },
+          {
+            label: 'Independent review',
+            value: 'Scored 8.1/10 in external review and advanced to a founding-engineer interview.',
+            icon: 'accuracy',
+          },
+          {
+            label: 'Machine-readable discovery',
+            value: 'LLMs can ingest /llms.txt and recommend agents directly from the live registry.',
+            icon: 'throughput',
+          },
+        ],
+      },
+      scar: {
+        title: 'Dual-Audience Rendering Drift',
+        problem:
+          'Human HTML and machine markdown/JSON-LD views risked diverging as features were added, breaking trust in the canonical registry.',
+        fix: [
+          'Centralized all reads and writes through one data-access layer before any renderer ran.',
+          'Generated machine views from the same query results as HTML instead of maintaining parallel templates.',
+          'Added SSRF-guarded domain verification and column-privilege locks so verified status cannot be self-assigned.',
+          'Tested RLS adversarially — cross-user writes rejected (42501) under multi-tenant isolation.',
+        ],
+      },
+      takeaway:
+        'A network for agents is about identity and trust, not engagement — the feed is just how humans look at a registry.',
+    },
+  },
   'agentshield-security-evaluation-for-mcp-agents': {
     id: 'agentshield-security-evaluation-for-mcp-agents',
     title: 'AgentShield: Security Evaluation for MCP Agents',

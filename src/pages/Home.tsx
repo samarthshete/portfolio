@@ -16,16 +16,10 @@ import { AboutSection } from './About'
 import { ExperienceSection } from './Experience'
 import { useNavigate } from 'react-router-dom'
 import { projectsData, type Project } from './ProjectDetail'
+import { FEATURED_PROJECT_IDS } from '../lib/projectCategories'
 
 const roles = ['AI/ML Engineer', 'Software Engineer', 'Cloud Architect', 'Full-Stack Developer']
 const isExternalUrl = (url?: string) => /^https?:\/\//.test(url ?? '')
-
-// ✅ Only 3 featured projects on Home
-const FEATURED_IDS = [
-  'agentshield-security-evaluation-for-mcp-agents',
-  'contextlens-rag-evaluation-debugging-platform',
-  'cloud-native-3tier',
-]
 
 export default function Home() {
   const navigate = useNavigate()
@@ -35,7 +29,7 @@ export default function Home() {
 
   // Pick featured by explicit IDs (stable + intentional)
   const featuredProjects: Project[] = useMemo(() => {
-    return FEATURED_IDS.map((id) => allProjects.find((p) => p.id === id)).filter(Boolean) as Project[]
+    return FEATURED_PROJECT_IDS.map((id) => allProjects.find((p) => p.id === id)).filter(Boolean) as Project[]
   }, [allProjects])
 
   const [currentRole, setCurrentRole] = useState(0)
