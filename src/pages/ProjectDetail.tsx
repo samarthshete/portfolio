@@ -27,6 +27,7 @@ import {
   Brain,
   Layers,
 } from 'lucide-react'
+import contextlensImg from '../assets/projects/contextlens.png'
 
 export type ProjectCategory = 'SDE' | 'ML'
 
@@ -369,8 +370,9 @@ export const projectsData: Record<string, Project> = {
       'llms.txt',
       'Vercel',
     ],
+    // TODO: replace Unsplash with local screenshot in src/assets/projects/agentscape.png
     image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop',
-    github: '',
+    github: 'https://github.com/samarthshete/Agentscape',
     demo: 'https://agentscape-kappa.vercel.app',
     date: '2026',
     team: 'Solo Project',
@@ -487,262 +489,275 @@ export const projectsData: Record<string, Project> = {
   },
   'agentshield-security-evaluation-for-mcp-agents': {
     id: 'agentshield-security-evaluation-for-mcp-agents',
-    title: 'AgentShield: Security Evaluation for MCP Agents',
+    title: 'AgentShield',
     category: 'ML',
     description:
-      'Red-team framework for testing tool-using AI agents against prompt injection, tool poisoning, and unsafe action flows.',
+      'A security linter for AI agent and MCP configs — deterministic rules plus a recall-safe semantic tier, scored against a human-labeled eval corpus.',
     longDescription:
-      'Tool-using AI agents create a much larger risk surface than standard chatbots because they can read external context, call tools, and take actions across connected systems. Most teams focus on capability first and only think about security after something breaks.\n\nI built AgentShield to evaluate agent workflows before deployment. The framework combines static artifact scanning with dynamic adversarial testing to probe MCP-connected agents for realistic attack patterns, including prompt injection, poisoned tool outputs, privilege escalation attempts, and unsafe action chaining. A judge-based validation layer then classifies whether the agent resisted, partially failed, or fully failed under each scenario.\n\nThe outcome is a practical security evaluation workflow for agent systems. AgentShield helps surface risky configurations, exposes exploit paths earlier, and gives developers a clearer way to harden prompts, permissions, tools, and orchestration logic before those systems reach production.',
+      `AgentShield statically scans AI agent configurations, MCP tool definitions, and agent traces for five attack categories: tool poisoning, indirect prompt injection, unsafe permissions, data-exfiltration patterns, and task drift. It ships as a Python CLI, a FastAPI service, and a React console with a paste-a-config live demo, producing JSON/Markdown reports with severity-ranked findings and CI-friendly exit codes.
+
+Detection is two-tiered by design: 11 deterministic rules provide the recall floor, and a context-aware semantic confirmer can only suppress findings — never create misses. An optional LLM escalation path is wrapped in four safety interlocks (severity gate, per-file budget, dismissal-confidence floor, fail-open-to-keep error handling) and prompt-hardened, since the text it classifies is by definition injection payload.
+
+Accuracy is measured, not asserted: a 50-artifact labeled corpus (27 hard negatives, artifacts drawn from real MCP server and agent-framework repos) is scored with per-category precision/recall/F1, Wilson confidence intervals, severity-weighted recall, and evidence-span validation — and enforced as an F1 ≥ 0.95 gate in CI. When a measured comparison showed the LLM tier lost to the deterministic tier (F1 0.879–0.971 vs 0.981), it stayed off by default.`,
     tags: [
       'Python',
-      'MCP',
+      'FastAPI',
+      'React',
+      'TypeScript',
+      'SQLite',
       'AI Security',
-      'Red Teaming',
-      'Agent Evaluation',
       'Prompt Injection',
-      'Tool Safety',
-      'CI Testing',
+      'MCP',
+      'CI/CD',
     ],
+    // TODO: replace Unsplash with local screenshot in src/assets/projects/agentshield.png
     image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&h=600&fit=crop',
-    github: '',
-    demo: '',
+    github: 'https://github.com/samarthshete/AgentShield',
+    demo: 'https://agent-shield-topaz.vercel.app',
     date: '2026',
     team: 'Solo Project',
     features: [
-      'Static scanning for risky MCP-connected artifacts and exposed instructions',
-      'Dynamic adversarial testing for tool-using agent workflows',
-      'Attack coverage across prompt injection, tool poisoning, escalation, and unsafe chaining',
-      'Judge-based evaluation of multi-step failures',
-      'Actionable reporting for hardening tools, prompts, and orchestration logic',
-      'Designed for repeatable security validation, not one-off demos',
+      '11 deterministic detection rules across 5 attack categories, with dual-channel parsing that scans content and permission declarations separately',
+      'Recall-safe semantic confirmer: three-valued disposition (confirm/dismiss/uncertain) with budget-capped, injection-hardened LLM escalation',
+      'Labeled evaluation harness: 50 artifacts, Wilson CIs, severity-weighted recall, evidence-span validation, enforced at F1 ≥ 0.95 in CI',
+      'Dynamic simulation: 5 scripted attack scenarios replayed through a policy engine with pluggable rule-based/OpenAI/Claude judges',
+      'Full product surface: 6-command CLI, 8-endpoint FastAPI API, 7-page React console with paste-config live demo',
+      '148 automated tests (136 pytest + 12 Vitest) and a CI workflow that dogfoods the scanner on its own repository',
     ],
     challenges:
-      'Modeling realistic attack paths, separating partial compromise from full compromise, evaluating tool-aware failures, and preventing noisy false positives.',
+      'Building an LLM-assisted false-positive filter for text that is, by definition, adversarial prompt-injection payload — without ever letting the filter cost recall.',
     impact:
-      'Evaluated 100+ adversarial workflows, reached ~82% precision in unsafe behavior detection, and created CI-friendly checks for agent security before deployment.',
+      'Reproducibly scores 96.2% precision / 100% recall (micro F1 98.1%) on a 50-artifact labeled corpus with 27 hard negatives, enforced as a CI gate, with a deployed live demo (Vercel + Render).',
     caseStudy: {
-      headline:
-        'A red-team evaluation framework that stress-tests tool-using AI agents for security failures before production.',
+      headline: 'A security linter that measures itself: eval-gated detection for AI agent configs',
       engineeringChallenge: {
-        title: 'The Engineering Challenge',
+        title: 'Suppressing false positives without ever creating false negatives',
         bullets: [
-          'Scanning prompts for risky text is easy; evaluating multi-step unsafe behavior across tool workflows is hard.',
-          'The framework had to inspect both static artifacts and dynamic behavior under realistic adversarial pressure.',
-          'Results needed to be actionable for engineers, not vague warnings.',
+          'Tier-1 substring rules are high-recall but noisy in prose; a naive LLM filter measurably destroyed recall (1.00 → 0.78) by over-dismissing low-severity findings',
+          'The confirmer therefore only suppresses HIGH/CRITICAL findings whose ±120-char context is clearly benign, and every failure mode — network error, malformed JSON, exhausted budget, low confidence — degrades to keeping the finding',
+          'Scanned artifacts are themselves injection payloads, so the LLM prompt wraps them in data delimiters with explicit do-not-follow instructions',
         ],
       },
       architecture: {
-        title: 'System Architecture & Logic',
+        title: 'One orchestration core, three thin front doors',
         summary:
-          'AgentShield evaluates agents in layers: static artifact analysis, dynamic scenario execution, behavior judgment, and actionable reporting.',
+          'A Typer CLI, a logic-free FastAPI wrapper, and a React SPA all call the same Python services: a static pipeline (discovery → dual-channel parsing → 11 rules → semantic confirmer) and a dynamic pipeline (scripted attacks → simulator → policy engine → pluggable judge), persisting to SQLite and scored by a statistics-bearing eval harness that gates CI.',
         agents: [
           {
-            name: 'Artifact Scanner',
-            role: 'Inspects exposed files, instructions, tool definitions, and MCP-connected surfaces for risky patterns before runtime.',
-            icon: 'database',
+            name: 'Static rule engine',
+            role: '11 deterministic rules over flattened content plus separately extracted permission declarations',
+            icon: 'backend',
           },
           {
-            name: 'Scenario Runner',
-            role: 'Executes repeatable adversarial workflows across injection, poisoning, escalation, and unsafe-tool classes.',
-            icon: 'orchestrator',
-          },
-          {
-            name: 'Evaluation Engine',
-            role: 'Determines whether the agent resisted, partially failed, or fully failed each attack scenario.',
+            name: 'Semantic confirmer',
+            role: 'Context-window disposition of every candidate; suppress-only, with guarded optional LLM escalation',
             icon: 'evaluator',
           },
           {
-            name: 'Reporting Layer',
-            role: 'Aggregates findings into fix-ready categories for prompts, permissions, tools, and orchestration logic.',
-            icon: 'frontend',
+            name: 'Dynamic simulator + policy engine',
+            role: 'Replays 5 scripted attack scenarios and evaluates traces with role-scoped policies',
+            icon: 'orchestrator',
+          },
+          {
+            name: 'LLM judge',
+            role: 'Opt-in OpenAI/Claude pass that dismisses false-positive policy violations, fail-closed on any malformed response',
+            icon: 'worker',
           },
         ],
       },
       decisions: {
-        title: 'Key Technical Decisions & Trade-offs',
+        title: 'Decisions with receipts',
         items: [
           {
-            heading: 'Why combine static and dynamic testing?',
-            decision: 'Built both static scanning and dynamic red-team execution.',
+            heading: 'Deterministic core, LLM at the edges',
+            decision:
+              'Rules provide the recall floor; LLM layers can only remove findings, and only behind severity, budget, and confidence interlocks.',
             tradeoff:
-              'Static checks are fast but limited; dynamic tests are realistic but slower. Combined coverage catches both exposed risk surfaces and exploitability.',
+              'Substring matching is evadable by paraphrase and obfuscation — accepted for an offline, deterministic, CI-reproducible default, and documented openly.',
           },
           {
-            heading: 'Why scenario-based red teaming?',
-            decision: 'Used workflow-specific adversarial scenarios over generic safety prompts.',
-            logic:
-              'The highest-risk failures come from unsafe actions, chained tool calls, and escalation paths, not just bad text generation.',
+            heading: 'Measure the LLM tier, then say no',
+            decision:
+              'Ran the labeled eval against gpt-4o-mini variants: unguarded F1 0.879 (11 missed findings), guardrailed 0.971 — both below the deterministic tier\'s 0.981, so it ships off by default.',
+            why: 'An eval harness exists precisely so fashionable options can lose to evidence.',
           },
           {
-            heading: 'Why judge-based validation?',
-            decision: 'Used structured judgment logic for multi-step outcomes instead of keyword matching.',
-            tradeoff:
-              'More evaluation complexity, but it supports nuanced outcomes like partial compromise and attempted tool misuse.',
+            heading: 'Freeze rules after real-world tuning',
+            decision:
+              'Cut false positives 19 → 7 on 20 real public artifacts via narrow context gates, then froze the rule set: changes now require a stable noise pattern plus before/after eval comparison.',
+            impact: 'Reported metrics stay meaningful instead of drifting with ad-hoc tweaks.',
           },
         ],
       },
       performance: {
-        title: 'Quantified Impact & Performance',
+        title: 'Measured on a labeled corpus, enforced in CI',
         metrics: [
           {
-            label: 'Adversarial coverage',
-            value: 'Evaluated 100+ adversarial workflows across injection, poisoning, unsafe-tool use, and escalation scenarios.',
-            icon: 'throughput',
-          },
-          {
-            label: 'Detection quality',
-            value: 'Reached about 82% precision in identifying adversarial or unsafe behavior in current validation runs.',
+            label: 'Micro precision / recall / F1',
+            value: '96.2% / 100% / 98.1% (50 artifacts, 27 hard negatives; Wilson 95% CIs reported)',
             icon: 'accuracy',
           },
           {
-            label: 'Operational readiness',
-            value: 'Designed for CI-style security checks before deployment to catch risky agent behavior earlier.',
+            label: 'Real-world false-positive reduction',
+            value: '19 → 7 findings (−63%) on a fixed 20-artifact public set',
             icon: 'reliability',
+          },
+          {
+            label: 'Static scan speed / test suite',
+            value: '~0.1 ms avg per benchmark case; 148 tests green (136 pytest in ~2 s + 12 Vitest)',
+            icon: 'latency',
           },
         ],
       },
       scar: {
-        title: 'The "False Compromise" Problem',
+        title: 'The LLM filter that ate 22% of recall',
         problem:
-          'Early versions marked agents as compromised when they merely echoed malicious content without executing unsafe behavior.',
+          'The first LLM-backed confirmer looked like a free win — until the labeled eval showed gpt-4o-mini dismissing 11 true positives, collapsing recall from 1.00 to 0.78 by confidently explaining away low-severity exfiltration markers in READMEs.',
         fix: [
-          'Split outcomes into layers: malicious content received, acknowledged, unsafe reasoning triggered, unsafe action attempted, and unsafe action executed.',
-          'Added tool-action validation so compromise requires operationally meaningful risk, not scary-looking text.',
-          'Reduced noisy failures and made reports useful for prioritizing real security fixes.',
+          'Added a severity gate so only HIGH/CRITICAL, deterministically-uncertain candidates ever reach the LLM',
+          'Added a dismissal-confidence floor (< 0.8 downgrades to keep) and a per-file call budget',
+          'Made every LLM failure mode resolve to keeping the finding — then re-measured, and kept the deterministic tier as the shipped default',
         ],
       },
       takeaway:
-        'Agent security evaluation is only useful when it distinguishes exposure from actual compromise and measures real operational risk.',
+        'Security tooling earns trust through measurement: a labeled corpus with confidence intervals, a CI gate on F1, and the willingness to bench your own LLM feature when the numbers say so.',
     },
   },
   'contextlens-rag-evaluation-debugging-platform': {
     id: 'contextlens-rag-evaluation-debugging-platform',
-    title: 'ContextLens: RAG Evaluation & Debugging Platform',
+    title: 'ContextLens',
     category: 'ML',
     description:
-      'Trace-driven platform for diagnosing retrieval, grounding, chunking, and hallucination failures in RAG systems.',
+      'RAG evaluation platform that traces every pipeline stage and explains why a run failed — with a 10-type failure taxonomy and statistically gated config comparison.',
     longDescription:
-      'Modern RAG systems often fail in ways that are hard to debug. A bad answer can come from weak retrieval, poor chunking, low-quality ranking, context dilution, or unsupported generation, but most teams only see the final output and a vague metric. That makes iteration slow and unreliable.\n\nI built ContextLens to make those failures inspectable. The platform captures full pipeline traces, stores retrieved chunks and context assembly artifacts, and evaluates each run using a hybrid scoring approach that combines deterministic checks with LLM-as-judge signals. Instead of producing a single shallow score, it helps pinpoint likely failure modes such as retrieval misses, weak evidence selection, grounding problems, and hallucinated synthesis.\n\nThe result is a developer-first evaluation workflow for RAG systems. ContextLens makes experiments easier to compare, makes failure analysis more concrete, and turns RAG debugging from guesswork into an observable engineering process.',
+      `ContextLens instruments retrieval-augmented generation end to end. Every benchmark run persists a complete trace — retrieved chunks with cosine scores and ranks, the generated answer, per-phase latencies, token counts, and cost — into a 10-table PostgreSQL + pgvector schema, then classifies the outcome into an explicit 10-type failure taxonomy (retrieval miss, chunk fragmentation, unsupported generation, and seven more).
+
+Evaluation runs in three modes: a deterministic heuristic mode (synchronous, token-recall scoring), a full LLM-as-judge mode (faithfulness, completeness, groundedness via OpenAI or Anthropic, queued through Redis + RQ so runs survive API restarts, with per-run locks, stale-lock reconciliation, and phase-level resume), and a hybrid mode where a documented deterministic gate skips the judge call when retrieval is already provably strong — every skip counted for auditability.
+
+The comparison layer is built around statistical honesty: config comparisons are confidence-tiered on unique-query effective sample size rather than raw run counts, mismatched query sets are rejected outright rather than caveated, heuristic and LLM-judge scores are never blended, and unknown costs persist as NULL — never a fabricated zero. A React 19 dashboard (three runtime dependencies, hand-rolled CSS charts) surfaces traces, run diffs, P50/P95 latency distributions, and failure breakdowns.`,
     tags: [
       'FastAPI',
-      'Python',
+      'React 19',
+      'TypeScript',
       'PostgreSQL',
       'pgvector',
-      'RAG',
-      'LLM Evaluation',
-      'Observability',
-      'Tracing',
+      'Redis + RQ',
+      'LLM-as-judge',
+      'RAG evaluation',
+      'Docker',
     ],
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=600&fit=crop',
-    github: '',
+    image: contextlensImg,
+    github: 'https://github.com/samarthshete/ContextLens',
     demo: '',
     date: '2026',
     team: 'Solo Project',
     features: [
-      'Trace-level inspection of retrieval, context assembly, and final answer generation',
-      'Hybrid scoring with deterministic checks and LLM-as-judge signals',
-      'Failure-mode diagnosis for retrieval misses, chunking issues, grounding gaps, and hallucinations',
-      'Experiment comparison across prompts, retrievers, ranking, and chunking strategies',
-      'Structured backend for repeatable evaluation workflows',
-      'Developer-first UX focused on debugging, not vanity metrics',
+      'Full per-run trace capture: retrieved chunks, scores, answer, per-phase latency, tokens, and cost across a 10-table schema',
+      '10-type failure taxonomy with deterministic heuristic classification and closed-enum LLM-judge output',
+      'Durable full-RAG job pipeline on Redis + RQ: per-run locks, stale-lock reconciliation, phase-level resume, one-click requeue',
+      'Hybrid judge-skip gate that avoids LLM judge calls when retrieval heuristics pass, with persisted audit counters',
+      'Confidence-tiered config comparison keyed on unique-query effective sample size (LOW < 8, MEDIUM < 15, HIGH ≥ 15)',
+      'Three-layer test surface: 292 collected backend tests, 228 passing frontend tests, 14 fully mocked Playwright e2e tests',
     ],
     challenges:
-      'Separating overlapping failure modes, avoiding misleading single-score evaluations, and storing rich traces cleanly for repeated experiments.',
+      'Making an eval platform trustworthy end to end — recovering crashed queue jobs via stale-lock reconciliation and phase-resume, hardening free-text LLM-judge output into a closed schema with bounded retry, and enforcing NULL-vs-zero and sample-size honesty at the schema and SQL layer.',
     impact:
-      'Ran 208 traced evaluations across 52 benchmark queries and reduced debugging ambiguity by making each run inspectable at chunk and context level.',
+      'A committed 48-run, 3-config benchmark quantifies the retrieval precision-vs-coverage trade-off (mean chunk relevance 0.516 → 0.311 as chunk size triples, while context coverage rises 0.62 → 0.80), reported with the platform\'s own MEDIUM-confidence sample-size gate.',
     caseStudy: {
       headline:
-        'A developer-first platform for debugging and evaluating RAG systems with trace-level visibility, hybrid scoring, and failure diagnosis.',
+        'Instrumenting RAG failure: a trace-first evaluation platform with statistical honesty built into the schema',
       engineeringChallenge: {
-        title: 'The Engineering Challenge',
+        title: 'Durable, auditable evaluation on unreliable parts',
         bullets: [
-          'Most evaluation tools collapse behavior into one score, hiding retrieval, chunking, grounding, and generation failures.',
-          'The platform needed to evaluate retrieval and generation together without conflating failure modes.',
-          'Experiments had to be comparable across retrievers, prompts, and ranking strategies.',
+          'Queue jobs die mid-run: recovery required proving a Redis lock stale by cross-checking five RQ registries against DB phase state, then resuming from the last persisted phase instead of restarting',
+          'LLM judges return malformed output: a 3-stage JSON extraction (fenced block → balanced-brace scan → raw parse) with exactly one bounded retry, summed token accounting, and clamp-with-receipts score observability',
+          'Metrics lie by default: unique-query effective sample size, rejected mismatched comparisons, never-blended evaluator buckets, and NULL-not-zero cost semantics are enforced in SQL and schema, not convention',
         ],
       },
       architecture: {
-        title: 'System Architecture & Logic',
+        title: 'Four components, one trace store',
         summary:
-          'ContextLens sits between the engineer and the RAG pipeline, captures traces at each step, scores outcomes with hybrid evaluation, and surfaces likely failure causes.',
+          'A React 19 SPA drives a FastAPI service (35 endpoints) over a 10-table PostgreSQL + pgvector store (384-dim HNSW cosine index). Heuristic runs complete synchronously; full RAG runs are enqueued to Redis + RQ and executed by a resume-aware worker that calls OpenAI/Anthropic for generation and judging, persisting every phase before advancing.',
         agents: [
           {
-            name: 'FastAPI Backend',
-            role: 'Orchestrates experiments, stores traces, and exposes evaluation APIs.',
+            name: 'FastAPI service',
+            role: '35 REST endpoints for ingest, retrieval, benchmark registry, runs, and dashboards; write-key middleware and a standardized error envelope with request IDs',
             icon: 'backend',
           },
           {
-            name: 'PostgreSQL + pgvector',
-            role: 'Stores runs, chunks, metadata, and embeddings for similarity-backed analysis.',
-            icon: 'database',
+            name: 'RQ worker',
+            role: 'Executes queued full-RAG runs under a per-run Redis lock with a three-phase, idempotent, resume-aware state machine',
+            icon: 'worker',
           },
           {
-            name: 'Hybrid Scoring Engine',
-            role: 'Combines heuristic checks with LLM-as-judge scoring for stronger signal.',
+            name: 'Evaluation engine',
+            role: 'Deterministic token-recall heuristics, LLM-as-judge (5 clamped 0–1 metrics), a hybrid skip gate, and 10-type failure classification',
             icon: 'evaluator',
           },
           {
-            name: 'Diagnostics UI',
-            role: 'Makes run-level breakdowns inspectable so engineers can locate where failures originated.',
+            name: 'React dashboard',
+            role: 'Trace inspection, run diffs, P50/P95 latency distributions, failure breakdowns, and confidence-gated config comparison — 3 runtime deps, no chart library',
             icon: 'frontend',
           },
         ],
       },
       decisions: {
-        title: 'Key Technical Decisions & Trade-offs',
+        title: 'Decisions and their bills',
         items: [
           {
-            heading: 'Why hybrid scoring?',
-            decision: 'Combined deterministic heuristics with LLM-as-judge evaluation.',
+            heading: 'pgvector over a dedicated vector DB',
+            decision: 'Store 384-dim embeddings in PostgreSQL with an HNSW cosine index, next to all trace metadata',
             tradeoff:
-              'Rule-based checks are reliable but shallow; judge models are expressive but noisy. Hybrid scoring gives stronger coverage across hard and semantic failures.',
+              'One transactionally consistent datastore and free cascade cleanup, at the cost of untuned index parameters and unvalidated behavior at large corpus scale',
           },
           {
-            heading: 'Why Postgres + pgvector?',
-            decision: 'Kept structured trace metadata and embedding search in one system.',
+            heading: 'OpenAI embeddings truncated to 384 dims',
+            decision:
+              'Replace the local sentence-transformers model with text-embedding-3-small at dimensions=384 to match the existing column',
             tradeoff:
-              'Dedicated vector databases can scale differently, but Postgres + pgvector simplified joins and experiment analysis.',
+              'Zero schema migration and a torch-free image that fits a 512 MB host, in exchange for a hard API dependency — even offline-style heuristic mode now needs an OpenAI key',
           },
           {
-            heading: 'Why trace-first design?',
-            decision: 'Stored full intermediate artifacts, not just final scores.',
-            why:
-              'Without trace artifacts, failure diagnosis becomes guesswork and experiments are hard to compare meaningfully.',
+            heading: 'Hybrid deterministic + LLM-judge scoring',
+            decision:
+              'Skip the judge call when three retrieval thresholds pass, recording every skip in per-run instrumentation counters',
+            tradeoff:
+              'Cuts judge API calls with a full audit trail, but the gate thresholds are uncalibrated constants and skipped-path faithfulness is lexical recall, not entailment — which the evaluator ID labels honestly',
           },
         ],
       },
       performance: {
-        title: 'Quantified Impact & Performance',
+        title: 'Verified numbers',
         metrics: [
           {
-            label: 'Experiment depth',
-            value: 'Ran 208 traced evaluation runs across 52 benchmark queries.',
-            icon: 'throughput',
-          },
-          {
-            label: 'Failure diagnosis quality',
-            value: 'Diagnosed failures across retrieval, chunking, grounding, and generation rather than collapsing everything to one metric.',
+            label: 'Committed 48-run benchmark (3 configs, 8 queries)',
+            value: 'relevance 0.516 → 0.311 (−40%) as coverage rises 0.62 → 0.80',
             icon: 'accuracy',
           },
           {
-            label: 'Debugging clarity',
-            value: 'Reduced ambiguity by making each run inspectable at chunk and context level across prompt/retriever variants.',
+            label: 'Test surface',
+            value: '292 backend collected · 228 frontend passing · 14 mocked e2e',
             icon: 'reliability',
+          },
+          {
+            label: 'System size',
+            value: '35 API endpoints · 10 tables · 8 migrations · ~33K LOC',
+            icon: 'scale',
           },
         ],
       },
       scar: {
-        title: 'The "False Pass" Problem',
+        title: 'The lock that outlived its worker',
         problem:
-          'Some answers sounded plausible and passed naive judging despite weak grounding in retrieved evidence.',
+          'A worker killed mid-run left its per-run Redis lock alive for up to an hour, silently blocking every requeue attempt while the run sat running forever — and RQ stores no job-to-run link to prove the worker was actually dead.',
         fix: [
-          'Split evaluation into layered checks: retrieval relevance, context support, answer grounding, and final response quality.',
-          'Added trace-level evidence checks to verify answers were actually supported by retrieved context.',
-          'Prevented semantically plausible but unsupported answers from inflating quality scores.',
+          'Built a reconciler that scans the queue plus five RQ registries for the newest job matching the run, and deletes the lock only when that job is terminal AND the DB row is in a stuck state',
+          'Made requeue resume-aware: a failed run is mapped back to its last completed phase by inspecting which result rows actually persisted, so no completed work repeats',
+          'Pinned the behavior with dedicated failure-and-lock tests covering stale-lock clearing from both the requeue path and the read-only status endpoint',
         ],
       },
       takeaway:
-        'A strong RAG evaluator cannot judge only the final answer; it must inspect the full path that produced it.',
+        'Evaluation infrastructure is only as credible as its worst-case honesty: the interesting engineering wasn\'t computing scores, it was refusing to report them when locks were stale, JSON was malformed, or sample sizes couldn\'t support the comparison.',
     },
   },
   'smarthire-ai': {
@@ -764,10 +779,11 @@ export const projectsData: Record<string, Project> = {
       'PDFPlumber',
       'Cosine Similarity',
     ],
+        // TODO: replace Unsplash with a local screenshot in src/assets/projects/
     image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=600&fit=crop',
     github: 'https://github.com/samarthshete/SmartHire',
     demo: '',
-    date: 'Jan 2024 - Present',
+    date: 'Jan 2024 – Present',
     team: 'Solo Project',
     features: [
       'Semantic matching between resumes and job descriptions using embeddings + cosine similarity',
@@ -896,10 +912,11 @@ export const projectsData: Record<string, Project> = {
       'OpenAI API',
       'Session Recovery',
     ],
+        // TODO: replace Unsplash with a local screenshot in src/assets/projects/
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&h=600&fit=crop',
     github: 'https://github.com/samarthshete/InterviewIQ',
     demo: '',
-    date: 'Aug 2023 - Dec 2023',
+    date: 'Aug 2023 – Dec 2023',
     team: 'Solo (Architecture) + Test Users',
     features: [
       '4-agent decentralized architecture with shared state persistence',
@@ -1022,9 +1039,10 @@ export const projectsData: Record<string, Project> = {
     longDescription:
       'This project focuses on eliminating configuration drift by creating a fully containerized 3-tier application where local, staging, and production behave the same. Docker + Docker Compose orchestrate services, migrations are versioned, and initialization is automated so contributors can onboard in minutes.',
     tags: ['React', 'Flask', 'PostgreSQL', 'Docker', 'Docker Compose', 'Flask-Migrate', 'Alembic', 'AWS Route 53'],
+        // TODO: replace Unsplash with a local screenshot in src/assets/projects/
     image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=600&fit=crop',
-    github: '#',
-    demo: '#',
+    github: '',
+    demo: '',
     date: '2024',
     team: 'Solo Project',
     features: [
@@ -1135,9 +1153,10 @@ export const projectsData: Record<string, Project> = {
     longDescription:
       'MindMate combines responsive real-time AI chat with secure, persistent well-being tracking. The system uses a multi-server architecture to keep the chat experience fast while the backend processes longitudinal analytics for trends and insights.',
     tags: ['React', 'Vercel', 'Node.js', 'Express', 'WebSockets', 'MongoDB Atlas', 'Firebase Auth', 'Gemini', 'NodeMailer'],
+        // TODO: replace Unsplash with a local screenshot in src/assets/projects/
     image: 'https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?w=1200&h=600&fit=crop',
-    github: '#',
-    demo: '#',
+    github: '',
+    demo: '',
     date: 'Mar 2025 (Hackathon)',
     team: 'Hackathon Team',
     features: [
@@ -1241,9 +1260,10 @@ export const projectsData: Record<string, Project> = {
       'Model Interpretability',
       'Feature Maps',
     ],
+        // TODO: replace Unsplash with a local screenshot in src/assets/projects/
     image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=1200&h=600&fit=crop',
-    github: '#',
-    demo: '#',
+    github: '',
+    demo: '',
     date: '2025',
     team: 'Team Project',
     features: [
@@ -1383,10 +1403,11 @@ export const projectsData: Record<string, Project> = {
       'XGBoost',
       'Feature Importance',
     ],
+        // TODO: replace Unsplash with a local screenshot in src/assets/projects/
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop',
-    github: '#',
-    demo: '#',
-    date: '2014–2018 Dataset',
+    github: '',
+    demo: '',
+    date: '2025 · course project (2014–2018 DC data)',
     team: 'Solo Project',
     features: [
       'Unified “Analytical Base Table” merging housing + crime datasets across different granularities',

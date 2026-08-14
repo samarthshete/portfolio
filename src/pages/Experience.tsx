@@ -10,7 +10,7 @@ const experiences = [
       'Building production RAG systems, autonomous agent workflows, and LLM evaluation infrastructure for enterprise-scale document intelligence.',
     achievements: [
       'Architected a production-grade RAG pipeline using LangChain, OpenAI API, and pgvector on AWS RDS, processing 50K+ enterprise documents with semantic search, which improved information retrieval accuracy by 42%',
-      'Built an autonomous AI agent framework with FastAPI and Python, implementing agentic workflows for document analysis and summarization, handling 10K+ daily requests, which automated 70%',
+      'Built an autonomous AI agent framework with FastAPI and Python, implementing agentic workflows for document analysis and summarization, handling 10K+ daily requests, which automated 70% of manual document analysis workflows',
       'Deployed LLM guardrails and prompt injection detection using custom adversarial testing frameworks, reducing security vulnerabilities by 65% and achieving 99.2% detection rate against malicious prompts across production models',
       'Designed and implemented an LLM-as-a-Judge evaluation pipeline with structured logging via OpenTelemetry and Prometheus, monitoring 15+ performance metrics across 3 model versions, which accelerated model iteration cycles by 55%',
     ],
@@ -93,7 +93,7 @@ export function ExperienceSection() {
           Experience
         </h1>
         <p className="text-xl text-foreground/60 dark:text-white/60 max-w-2xl">
-          Roles where I shipped production improvements, reduced operational risk, and learned by building.
+          Production engineering across AI systems, backend platforms, and cloud infrastructure.
         </p>
       </motion.div>
 

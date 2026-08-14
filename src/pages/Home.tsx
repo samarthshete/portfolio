@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useState, useEffect, useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import {
   ArrowRight,
   Github,
@@ -8,19 +8,23 @@ import {
   MapPin,
   Phone,
   Linkedin,
+  Download,
 } from 'lucide-react'
 import { WritingSection } from './Writing'
 import { AboutSection } from './About'
 import { ExperienceSection } from './Experience'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { projectsData, type Project } from './ProjectDetail'
 import { FEATURED_PROJECT_IDS } from '../lib/projectCategories'
+import ContactForm from '../components/ContactForm'
 
-const roles = ['AI/ML Engineer', 'Software Engineer', 'Cloud Architect', 'Full-Stack Developer']
+const resumeHref = `${import.meta.env.BASE_URL}Samarth_Shete_Resume.pdf`
+
 const isExternalUrl = (url?: string) => /^https?:\/\//.test(url ?? '')
 
 export default function Home() {
   const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
 
   // Single source of truth
   const allProjects: Project[] = useMemo(() => Object.values(projectsData), [])
@@ -30,25 +34,6 @@ export default function Home() {
     return FEATURED_PROJECT_IDS.map((id) => allProjects.find((p) => p.id === id)).filter(Boolean) as Project[]
   }, [allProjects])
 
-  const [currentRole, setCurrentRole] = useState(0)
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-
-  useEffect(() => {
-    const interval = setInterval(() => setCurrentRole((prev) => (prev + 1) % roles.length), 3000)
-    return () => clearInterval(interval)
-  }, [])
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Form submitted:', formData)
-    alert("Thank you for your message! I'll get back to you soon.")
-    setFormData({ name: '', email: '', message: '' })
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-  }
-
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (!element) return
@@ -57,6 +42,27 @@ export default function Home() {
     const offsetPosition = elementPosition + window.pageYOffset - offset
     window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
   }
+
+  // Nav from other routes arrives as /?section=<id>; scroll once sections are mounted.
+  const requestedSection = searchParams.get('section')
+
+  useEffect(() => {
+    if (!requestedSection) return
+
+    const frame = requestAnimationFrame(() => {
+      scrollToSection(requestedSection)
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev)
+          next.delete('section')
+          return next
+        },
+        { replace: true }
+      )
+    })
+
+    return () => cancelAnimationFrame(frame)
+  }, [requestedSection, setSearchParams])
 
   const ProjectCard = (project: Project, index: number) => (
     <motion.div
@@ -187,33 +193,23 @@ export default function Home() {
               transition={{ delay: 0.4 }}
             >
               <motion.p
-                key={currentRole}
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -18 }}
                 transition={{ duration: 0.5 }}
                 className="text-2xl sm:text-3xl md:text-4xl font-medium text-foreground/70 dark:text-white/70"
               >
-                {roles[currentRole]}
+                AI Engineer
               </motion.p>
             </motion.div>
 
             <motion.p
-              className="text-xl sm:text-2xl text-foreground/60 dark:text-white/60 max-w-3xl mx-auto mb-8"
+              className="text-xl sm:text-2xl text-foreground/60 dark:text-white/60 max-w-3xl mx-auto mb-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
             >
-              Building calm, fast software — from ML systems to delightful UIs.
-            </motion.p>
-
-            <motion.p
-              className="text-lg text-foreground/50 dark:text-white/50 max-w-2xl mx-auto mb-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-            >
-              I design and ship AI-powered, cloud-native software with measurable impact.
+              I build and evaluate production LLM systems — RAG pipelines, agent security, and eval
+              infrastructure — on a 3+ year software engineering foundation.
             </motion.p>
 
             <motion.div
@@ -236,6 +232,16 @@ export default function Home() {
               >
                 Get in Touch
               </button>
+
+              <a
+                href={resumeHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 border border-primary/40 dark:border-accent/40 text-primary dark:text-accent rounded-2xl font-medium hover:bg-primary/10 dark:hover:bg-accent/10 hover:scale-105 transition-all duration-200 flex items-center gap-2"
+              >
+                <Download className="w-5 h-5" />
+                Download Resume
+              </a>
             </motion.div>
 
             <motion.div
@@ -245,23 +251,20 @@ export default function Home() {
               transition={{ delay: 1.2 }}
             >
               {[
-                { label: 'Python', value: 'Expert' },
-                { label: 'Machine Learning', value: 'Advanced' },
-                { label: 'AWS/Cloud', value: 'Proficient' },
-                { label: 'React', value: 'Advanced' },
-              ].map((skill, index) => (
+                '3+ yrs production engineering',
+                'RAG & LLM evaluation',
+                'AWS · Docker · K8s',
+                "MS CS, GWU '26",
+              ].map((fact, index) => (
                 <motion.div
-                  key={skill.label}
+                  key={fact}
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.2 + index * 0.08 }}
                   className="text-center"
                 >
-                  <p className="text-sm text-foreground/40 dark:text-white/40 mb-1">
-                    {skill.label}
-                  </p>
                   <p className="text-lg font-semibold text-foreground dark:text-white">
-                    {skill.value}
+                    {fact}
                   </p>
                 </motion.div>
               ))}
@@ -439,71 +442,7 @@ export default function Home() {
                   Send a Message
                 </h3>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium text-foreground dark:text-white mb-2"
-                    >
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-background/50 dark:bg-background/30 backdrop-blur-sm border border-white/20 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-primary dark:focus:ring-accent focus:border-transparent outline-none transition-all text-foreground dark:text-white"
-                      placeholder="Your name"
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-foreground dark:text-white mb-2"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-background/50 dark:bg-background/30 backdrop-blur-sm border border-white/20 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-primary dark:focus:ring-accent focus:border-transparent outline-none transition-all text-foreground dark:text-white"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium text-foreground dark:text-white mb-2"
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={6}
-                      className="w-full px-4 py-3 bg-background/50 dark:bg-background/30 backdrop-blur-sm border border-white/20 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-primary dark:focus:ring-accent focus:border-transparent outline-none transition-all text-foreground dark:text-white resize-none"
-                      placeholder="Your message..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full px-6 py-3 bg-primary dark:bg-accent text-white rounded-2xl font-medium hover:shadow-lg hover:scale-[1.02] transition-all"
-                  >
-                    Send Message
-                  </button>
-                </form>
+                <ContactForm variant="home" />
               </div>
             </motion.div>
           </div>

@@ -50,9 +50,6 @@
   .bg-background {
     background-color: hsl(var(--background));
   }
-  .bg-dark {
-    background-color: hsl(var(--dark));
-  }
   .text-foreground {
     color: hsl(var(--foreground));
   }

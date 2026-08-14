@@ -20,6 +20,8 @@ const navItems: NavItem[] = [
   { id: 'contact', label: 'Contact', sectionId: 'contact', pagePath: '/contact' },
 ]
 
+const resumeHref = `${import.meta.env.BASE_URL}Samarth_Shete_Resume.pdf`
+
 function scrollToSection(sectionId: string) {
   const el = document.getElementById(sectionId)
   if (!el) return
@@ -127,6 +129,14 @@ export default function Navigation() {
                   )}
                 </button>
               ))}
+              <a
+                href={resumeHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium px-3.5 py-1.5 rounded-full border border-primary/40 dark:border-accent/40 text-primary dark:text-accent hover:bg-primary/10 dark:hover:bg-accent/10 transition-colors"
+              >
+                Resume
+              </a>
             </div>
 
             <div className="flex items-center gap-2">
@@ -172,6 +182,15 @@ export default function Navigation() {
                   {item.label}
                 </button>
               ))}
+              <a
+                href={resumeHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full text-center px-4 py-3 rounded-full border border-primary/40 dark:border-accent/40 text-primary dark:text-accent font-medium hover:bg-primary/10 dark:hover:bg-accent/10 transition-colors"
+              >
+                Resume
+              </a>
             </div>
           </motion.div>
         )}
