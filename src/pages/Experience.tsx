@@ -28,47 +28,6 @@ const experiences = [
     ],
   },
   {
-    company: 'The George Washington University School of Business',
-    role: 'Graduate Teaching Assistant',
-    period: 'Jan 2026 - May 2026',
-    description:
-      'Support graduate level analytics coursework by mentoring students on machine learning pipelines, cloud deployment, and engineering best practices.',
-    achievements: [
-      'Mentor 60+ graduate students on building ML pipelines using scikit-learn and PyTorch, guiding them from theoretical models to working implementations',
-      'Conduct weekly office hours and debugging sessions helping students troubleshoot data pipelines, model training issues, and AWS deployment environments',
-      'Review project code and enforce production grade engineering practices including logging, unit testing, and IAM security configurations',
-      'Collaborate with faculty on assessment grading and identifying recurring conceptual gaps to improve student performance across course and projects',
-      'Supported 15+ graduate ML projects end-to-end, ensuring students delivered production-ready models with proper testing and cloud deployment',
-    ],
-    technologies: [
-      'Python',
-      'scikit-learn',
-      'PyTorch',
-      'Machine Learning',
-      'AWS',
-      'Git',
-    ],
-  },
-  {
-    company: 'The George Washington University Law School',
-    role: 'Technical Assistant',
-    period: 'May 2025 - May 2026',
-    description:
-      'Built internal automation tooling for academic media operations, turning fragile manual workflows into reliable API-driven publishing pipelines.',
-    achievements: [
-      'Removed manual MediaSpace entry for 300+ weekly recordings across 80+ law courses by building Python tooling on Kaltura, Epiphan Cloud, and Canvas APIs for scheduling, tagging, and reconciliation',
-      'Cut mean time-to-detect failed recordings from ~48 hours to under 4 by instrumenting a daily reconciliation workflow across Kaltura, Zoom, and Freshdesk REST APIs before issues reached faculty and students',
-    ],
-    technologies: [
-      'Python',
-      'Kaltura API',
-      'Epiphan Cloud API',
-      'Canvas API',
-      'Zoom API',
-      'Freshdesk API',
-    ],
-  },
-  {
     company: 'Virtual Infotech Solution, India',
     role: 'Software Development Engineer',
     period: 'May 2023 – Jul 2024',
@@ -96,19 +55,6 @@ const experiences = [
     ],
   },
   {
-    company: 'GirlScript Summer of Code',
-    role: 'GSSOC 2023 Contributor',
-    period: 'May 2023 - Aug 2023',
-    description:
-      "GirlScript Summer of Code is one of India's largest open source programs, connecting contributors with real-world projects maintained by active developer communities.",
-    achievements: [
-      'Reviewed codebases, submitted pull requests, and resolved issues across participating repositories',
-      'Collaborated with project maintainers on feature implementations, bug fixes, and documentation improvements',
-      'Worked within asynchronous, distributed engineering environments — learning how to communicate clearly through code and written reviews',
-    ],
-    technologies: ['GitHub', 'Git'],
-  },
-  {
     company: 'Neon IT Systems, India',
     role: 'Software Engineer',
     period: 'Jun 2021 – Apr 2023',
@@ -131,43 +77,6 @@ const experiences = [
       'Supertest',
       'Redis',
     ],
-  },
-  {
-    company: 'VG Computers',
-    role: 'Machine Learning Intern',
-    period: 'Nov 2020 - May 2021',
-    description:
-      'Worked on applied machine learning systems for fraud detection and automated recruitment analysis.',
-    achievements: [
-      'Built fraud detection models (XGBoost, scikit-learn) improving ROC-AUC 18% through feature engineering and hyperparameter tuning',
-      'Developed NLP resume parsing APIs using Flask/FastAPI to automate candidate-role matching for hiring workflows',
-      'Deployed ML pipelines on AWS SageMaker, enabling scalable model training and inference',
-      'Implemented automated retraining workflows using MLflow and Airflow for continuous model updates',
-      'Delivered two production ML systems — a fraud detection model and resume parser — running on automated AWS pipelines',
-    ],
-    technologies: [
-      'Python',
-      'XGBoost',
-      'scikit-learn',
-      'Flask',
-      'FastAPI',
-      'AWS SageMaker',
-      'MLflow',
-      'Airflow',
-    ],
-  },
-  {
-    company: 'H Globe Tech',
-    role: 'Trainee Python Developer',
-    period: 'Oct 2019 - Jan 2020',
-    description:
-      'Built IoT automation systems, sensor data pipelines, and billing APIs with Python and cloud-backed storage.',
-    achievements: [
-      'Developed and deployed a smart home automation system using Python, Flask, and IoT sensors, implementing adaptive scheduling algorithms that improved user convenience and achieved 20% energy savings',
-      'Built data pipelines with MongoDB and Apache Kafka, optimizing sensor data ingestion/storage and query response times through document indexing and aggregation pipelines',
-      'Crafted Billing APIs utilizing Flask, MongoDB, and AWS to efficiently store and retrieve billing reports, reduced computation costs and provided a valuable tool for debugging auto-generated bills',
-    ],
-    technologies: ['Python', 'Flask', 'MongoDB', 'Apache Kafka', 'AWS'],
   },
 ]
 

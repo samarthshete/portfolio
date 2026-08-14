@@ -7,9 +7,7 @@ import {
   Mail,
   MapPin,
   Phone,
-  Download,
   Linkedin,
-  Twitter,
 } from 'lucide-react'
 import { WritingSection } from './Writing'
 import { AboutSection } from './About'
@@ -366,10 +364,10 @@ export default function Home() {
                       <div>
                         <p className="text-sm text-foreground/50 dark:text-white/50">Email</p>
                         <a
-                          href="mailto:samarth.shete@gwu.edu"
+                          href="mailto:samarthshete1420@gmail.com"
                           className="text-foreground dark:text-white hover:text-primary dark:hover:text-accent transition-colors"
                         >
-                          samarth.shete@gwu.edu
+                          samarthshete1420@gmail.com
                         </a>
                       </div>
                     </div>
@@ -390,7 +388,12 @@ export default function Home() {
                       </div>
                       <div>
                         <p className="text-sm text-foreground/50 dark:text-white/50">Phone</p>
-                        <p className="text-foreground dark:text-white">+1 (703) 928-9684</p>
+                        <a
+                          href="tel:+15712756434"
+                          className="text-foreground dark:text-white hover:text-primary dark:hover:text-accent transition-colors"
+                        >
+                          (571) 275-6434
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -421,17 +424,6 @@ export default function Home() {
                     </a>
                     
                   </div>
-                </div>
-
-                <div>
-                  <a
-                    href="https://drive.google.com/file/d/1pNvMtolarKJhtX-VyEL3O3QXxHnWkvLb/view?usp=sharing"
-                    download
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary dark:bg-accent text-white rounded-2xl font-medium hover:shadow-lg transition-all hover:scale-105"
-                  >
-                    <Download className="w-5 h-5" />
-                    Download Resume
-                  </a>
                 </div>
               </div>
             </motion.div>
