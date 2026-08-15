@@ -263,7 +263,7 @@ export default function Home() {
                   transition={{ delay: 1.2 + index * 0.08 }}
                   whileHover={{ y: -4, scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="rounded-2xl px-4 py-3 flex items-center justify-center text-center border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-white/5 hover:border-primary/40 dark:hover:border-accent/40 hover:bg-primary/5 dark:hover:bg-accent/10 hover:shadow-lg transition-colors duration-200"
+                  className="rounded-2xl px-4 py-3 flex items-center justify-center text-center border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-white/5 hover:border-primary/40 dark:hover:border-accent/40 hover:bg-primary/5 dark:hover:bg-accent/10 hover:shadow-lg transition-[background-color,border-color,box-shadow] duration-200"
                 >
                   <p className="text-sm font-semibold text-foreground dark:text-white">
                     {fact}
