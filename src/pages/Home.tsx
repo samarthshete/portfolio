@@ -251,20 +251,23 @@ export default function Home() {
               transition={{ delay: 1.2 }}
             >
               {[
-                '3+ yrs production engineering',
-                'RAG & LLM evaluation',
-                'AWS · Docker · K8s',
-                "MS CS, GWU '26",
-              ].map((fact, index) => (
+                { label: 'Python', value: 'Expert' },
+                { label: 'Machine Learning', value: 'Advanced' },
+                { label: 'AWS/Cloud', value: 'Proficient' },
+                { label: 'React', value: 'Advanced' },
+              ].map((skill, index) => (
                 <motion.div
-                  key={fact}
+                  key={skill.label}
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.2 + index * 0.08 }}
                   className="text-center"
                 >
+                  <p className="text-sm text-foreground/40 dark:text-white/40 mb-1">
+                    {skill.label}
+                  </p>
                   <p className="text-lg font-semibold text-foreground dark:text-white">
-                    {fact}
+                    {skill.value}
                   </p>
                 </motion.div>
               ))}
