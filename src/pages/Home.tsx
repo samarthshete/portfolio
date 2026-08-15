@@ -251,23 +251,22 @@ export default function Home() {
               transition={{ delay: 1.2 }}
             >
               {[
-                { label: 'Python', value: 'Expert' },
-                { label: 'Machine Learning', value: 'Advanced' },
-                { label: 'AWS/Cloud', value: 'Proficient' },
-                { label: 'React', value: 'Advanced' },
-              ].map((skill, index) => (
+                '3+ yrs production engineering',
+                'RAG & LLM evaluation',
+                'AWS · Docker · K8s',
+                "MS CS, GWU '26",
+              ].map((fact, index) => (
                 <motion.div
-                  key={skill.label}
+                  key={fact}
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.2 + index * 0.08 }}
-                  className="text-center"
+                  whileHover={{ y: -4, scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="rounded-2xl px-4 py-3 flex items-center justify-center text-center border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-white/5 hover:border-primary/40 dark:hover:border-accent/40 hover:bg-primary/5 dark:hover:bg-accent/10 hover:shadow-lg transition-colors duration-200"
                 >
-                  <p className="text-sm text-foreground/40 dark:text-white/40 mb-1">
-                    {skill.label}
-                  </p>
-                  <p className="text-lg font-semibold text-foreground dark:text-white">
-                    {skill.value}
+                  <p className="text-sm font-semibold text-foreground dark:text-white">
+                    {fact}
                   </p>
                 </motion.div>
               ))}

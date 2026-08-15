@@ -1,26 +1,69 @@
 import { motion } from 'framer-motion'
-import { Code, Cpu, Cloud, Zap } from 'lucide-react'
+import { Brain, Cloud, Code, Cpu, ShieldCheck, Sparkles } from 'lucide-react'
 
 const skills = [
   {
+    category: 'AI Engineering & LLMs',
+    items: [
+      'LLMs',
+      'RAG',
+      'LangChain',
+      'pgvector',
+      'Embeddings',
+      'LLM-as-a-Judge',
+      'AI Guardrails',
+      'Prompt Injection Defense',
+      'AI Agents',
+    ],
+    icon: Brain,
+  },
+  {
+    category: 'Machine Learning & NLP',
+    items: [
+      'PyTorch',
+      'scikit-learn',
+      'XGBoost',
+      'Hugging Face Transformers',
+      'Semantic Search',
+      'Model Evaluation',
+    ],
+    icon: Sparkles,
+  },
+  {
     category: 'Languages',
-    items: ['Python', 'JavaScript', 'TypeScript', 'SQL'],
+    items: ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Bash'],
     icon: Code,
   },
   {
-    category: 'Backend & APIs',
-    items: ['FastAPI', 'Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'Redis'],
+    category: 'Full-Stack & APIs',
+    items: [
+      'FastAPI',
+      'Node.js',
+      'Express',
+      'React 18',
+      'Next.js',
+      'PostgreSQL',
+      'MongoDB',
+      'Redis',
+    ],
     icon: Cpu,
   },
   {
     category: 'Cloud & DevOps',
-    items: ['AWS (EC2, ECR, CloudFront)', 'Docker', 'GitHub Actions', 'CI/CD', 'NGINX'],
+    items: [
+      'AWS (EC2, Lambda, S3, RDS, EKS)',
+      'Docker',
+      'Kubernetes',
+      'GitHub Actions',
+      'CI/CD',
+      'NGINX',
+    ],
     icon: Cloud,
   },
   {
-    category: 'Frontend & Security',
-    items: ['React 18', 'Next.js', 'JWT', 'RBAC', 'OAuth2', 'CSP'],
-    icon: Zap,
+    category: 'Observability & Security',
+    items: ['OpenTelemetry', 'Prometheus', 'Grafana', 'JWT', 'OAuth2', 'RBAC', 'CSP'],
+    icon: ShieldCheck,
   },
 ]
 
@@ -66,19 +109,19 @@ export function AboutSection() {
             <ul className="space-y-4 text-foreground/70 dark:text-white/70">
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-accent mt-2 flex-shrink-0" />
-                <span>Automate multi-system workflows with reliable API integrations and reconciliation pipelines</span>
+                <span>Build and evaluate production LLM systems — RAG pipelines, agent workflows, and LLM-as-a-Judge evaluation infrastructure</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-accent mt-2 flex-shrink-0" />
-                <span>Build and optimize backend services for low latency, high throughput, and data consistency</span>
+                <span>Red-team and harden AI agents against prompt injection, tool poisoning, and unsafe action chaining</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-accent mt-2 flex-shrink-0" />
-                <span>Ship full-stack products with modern React and Node stacks, performance tuning, and observability</span>
+                <span>Design backend services with FastAPI, Node.js, PostgreSQL/pgvector, and Redis for low latency and high throughput</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-accent mt-2 flex-shrink-0" />
-                <span>Implement security and delivery standards including JWT, RBAC, OAuth2, CSP, Docker, and CI/CD</span>
+                <span>Ship with production discipline: Docker, CI/CD, observability (OpenTelemetry, Prometheus), and security standards (JWT, OAuth2, RBAC)</span>
               </li>
             </ul>
           </div>
